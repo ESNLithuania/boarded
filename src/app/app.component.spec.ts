@@ -14,4 +14,8 @@ describe('App', () => {
     // Add real test here
     expect(2).toBe(2);
   }));
+  it ('should work', inject([AppComponent], (app: AppComponent) => {
+    // Add real test here
+    expect(3).toBe(2);
+  }));
 });
