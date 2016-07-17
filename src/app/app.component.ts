@@ -8,6 +8,6 @@ import '../../public/css/styles.css';
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  directives: [MD_BUTTON_DIRECTIVES, MD_CARD_DIRECTIVES]
+  directives: [MD_BUTTON_DIRECTIVES, MD_CARD_DIRECTIVES, ROUTER_DIRECTIVES]
 })
 export class AppComponent { }
