@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 @font-face {
     font-family: 'KelsonSans';
     src: url('../fonts/Kelson Sans Regular.woff') format('woff'),
@@ -9,6 +14,13 @@ h1,h2,h3,h4,h5,h6 {
 
 body {
     font-family: Helvetica, Arial, sans-serif;
-    background: hsl(204, 15%, 93%);
-    color: hsl(0, 0%, 0%);
 }
+
+.dark-primary-color    { background: #0288D1; }
+.default-primary-color { background: #03A9F4; }
+.light-primary-color   { background: #B3E5FC; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF4081; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #727272; }
+.divider-color         { border-color: #B6B6B6; }

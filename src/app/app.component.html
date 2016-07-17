@@ -1,12 +1,11 @@
 <main>
-    <div class="menu">
+    <md-toolbar [color]="primary">
+      <span>ESN Lithuania boarded system</span>
+    </md-toolbar>
+    <div class="navbar">
         <b-navbar></b-navbar>
-        <router-outlet></router-outlet>
     </div>
     <content>
-        <h1>Hello ESN'er</h1>
-        <md-card>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius hic asperiores illum corporis, maxime officia. Aperiam veritatis pariatur ab corporis, obcaecati vel id minus, repellendus dolor quae cum velit sit!
-        </md-card>
+        <router-outlet></router-outlet>
     </content>
 </main>
