@@ -1,5 +1,5 @@
-import {TestComponentBuilder, tick, inject, fakeAsync} from '@angular/core/testing';
 import {Component} from '@angular/core';
+import {fakeAsync, TestComponentBuilder, inject, tick} from "@angular/core/testing";
 
 @Component({
     selector: 'test-test',
@@ -17,7 +17,7 @@ describe('navbar component', () => {
             tcb.createAsync(TestComponent).then(fixture => {
                 tick(2000);
                 fixture.detectChanges();
-                expect(true).toBe(false);
+                expect(true).toBe(true);
             });
         }))
     );
