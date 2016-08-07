@@ -11,5 +11,7 @@ import 'rxjs';
 import '@angular2-material/core';
 import '@angular2-material/button';
 import '@angular2-material/card';
+import '@angular2-material/input';
+import '@angular2-material/toolbar';
 
 import 'ng2-bootstrap';
