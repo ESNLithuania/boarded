@@ -11,6 +11,9 @@ import {HomeComponent} from "./+home/home.component";
 import {RegisterComponent} from "./+register/register.component";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {CommonModule} from "@angular/common";
+import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire} from 'angularfire2';
+
+//TODO(zygis): all these declarations need to be split into separate modules
 
 @NgModule({
   declarations: [

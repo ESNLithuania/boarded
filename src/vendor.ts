@@ -14,5 +14,8 @@ import '@angular2-material/card';
 import '@angular2-material/input';
 import '@angular2-material/toolbar';
 import '@angular2-material/tabs';
+//Firebase
+import 'angularfire2';
+import 'firebase';
 
 import 'ng2-bootstrap';
