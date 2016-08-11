@@ -9,15 +9,19 @@ import {MdInputModule} from "@angular2-material/input";
 import {routing, appRoutingProviders} from "./app.routing";
 import {HomeComponent} from "./+home/home.component";
 import {RegisterComponent} from "./+register/register.component";
+import {NavbarComponent} from "./shared/navbar/navbar.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     routing,
     // Forms
     FormsModule,
