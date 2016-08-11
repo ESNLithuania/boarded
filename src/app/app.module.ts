@@ -33,8 +33,14 @@ import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire} from 'angularfire2';
     MdToolbarModule,
     MdCardModule,
     MdInputModule,
+    //Firebase
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, defaultFirebase({
+    apiKey: "<your-key>",
+    authDomain: "<your-project-authdomain>",
+    databaseURL: "<your-database-URL>",
+    storageBucket: "<your-storage-bucket>",
+  })],
   bootstrap: [AppComponent],
 })
 export class AppModule {
