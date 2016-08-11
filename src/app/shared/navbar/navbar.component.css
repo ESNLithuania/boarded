@@ -3,5 +3,23 @@ nav {
 }
 
 .menu-item {
+    position: relative;
+    border-bottom: 1px solid green;
+    padding: 0 12px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    opacity: 0.6;
+    flex: 1;
+}
 
+.active .bottom-ink {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: green;
+    transition: 350ms ease-out;
+    width:100%;
 }

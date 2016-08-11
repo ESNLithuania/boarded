@@ -1,4 +1,16 @@
 <nav>
-    <div class="menu-item" routerLink="/" routerLinkActive="active">Home</div>
-    <div class="menu-item" routerLink="/register" routerLinkActive="active">Register</div>
+  <div class="menu-item"
+       routerLink="/"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <span class="title">Home</span>
+    <div class="bottom-ink"></div>
+  </div>
+  <div class="menu-item"
+       routerLink="/register"
+       routerLinkActive="active">
+    <span class="title">Register</span>
+    <div class="bottom-ink"></div>
+  </div>
 </nav>
