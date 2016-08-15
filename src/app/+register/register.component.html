@@ -3,10 +3,10 @@
     Registration form
   </md-card-title>
   <md-card-content>
-    <form>
+    <form #form="ngForm">
       <md-input placeholder="Name" name="first_name" [(ngModel)]="user.firstName"></md-input>
       <md-input placeholder="Surname" name="surname" [(ngModel)]="user.surname"></md-input>
     </form>
   </md-card-content>
 </md-card>
-{{model.name}}
+{{user | json}}

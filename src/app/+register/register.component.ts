@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {User} from '../+users/user';
 
 @Component({
   selector: 'b-register',
@@ -7,4 +8,6 @@ import {Component} from "@angular/core";
 })
 
 export class RegisterComponent {
+  user = new User();
+
 }
