@@ -1,25 +1,36 @@
-<div class="register-form-wrapper" [hidden]="submitted">
+<div class="register-form-wrapper"
+     [hidden]="submitted">
   <md-card>
     <md-card-title>
       Registration form
     </md-card-title>
     <md-card-content>
-      <form #form="ngForm">
+      <form #form="ngForm"
+            (ngSubmit)="onSubmit()">
         <md-input placeholder="Name"
                   name="first_name"
-                  [(ngModel)]="user.firstName"></md-input>
+                  [(ngModel)]="user.firstName" required></md-input>
         <md-input placeholder="Surname"
                   name="surname"
-                  [(ngModel)]="user.surname"></md-input>
+                  [(ngModel)]="user.surname" required></md-input>
+        <div class="form-select-wrapper">
+          <label for="section">Section</label>
+          <select class="form-select" id="section" name="section" required>
+            <option *ngFor="let section of user.sections">{{section}}</option>
+          </select>
+        </div>
         <button md-raised-button
                 color="primary"
-                (click)="onSubmit($event)">Submit!
+                type="submit"
+                [disabled]="!form.valid"
+                >Submit!
         </button>
       </form>
     </md-card-content>
   </md-card>
 </div>
-<div class="register-form-results" [hidden]="!submitted">
+<div class="register-form-results"
+     [hidden]="!submitted">
   <md-card>
     <md-card-content>
       <h3>You have successfully submitted your registration</h3>
