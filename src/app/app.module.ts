@@ -11,9 +11,16 @@ import {HomeComponent} from "./+home/home.component";
 import {RegisterComponent} from "./+register/register.component";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {CommonModule} from "@angular/common";
-import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire} from 'angularfire2';
+import {AngularFireModule} from "angularfire2";
 
 //TODO(zygis): all these declarations need to be split into separate modules
+
+const firebaseConfig = {
+  apiKey: "<your-key>",
+  authDomain: "<your-project-authdomain>",
+  databaseURL: "<your-database-URL>",
+  storageBucket: "<your-storage-bucket>"
+};
 
 @NgModule({
   declarations: [
@@ -34,13 +41,9 @@ import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire} from 'angularfire2';
     MdCardModule,
     MdInputModule,
     //Firebase
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [appRoutingProviders, defaultFirebase({
-    apiKey: "<your-key>",
-    authDomain: "<your-project-authdomain>",
-    databaseURL: "<your-database-URL>",
-    storageBucket: "<your-storage-bucket>",
-  })],
+  providers: [appRoutingProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {
