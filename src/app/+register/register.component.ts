@@ -8,6 +8,10 @@ import {User} from '../+users/user';
 })
 
 export class RegisterComponent {
-  user = new User();
+  user: User = new User();
+  submitted: boolean = false;
 
+  onSubmit() {
+    this.submitted = true;
+  }
 }
