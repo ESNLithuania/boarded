@@ -15,11 +15,6 @@ nav {
     flex: 1;
 }
 
-.active .bottom-ink {
-    position: absolute;
-    bottom: 0;
-    height: 2px;
-    background-color: green;
-    transition: 350ms ease-out;
-    width:100%;
+.active.menu-item {
+    border-bottom: 3px solid green;
 }
