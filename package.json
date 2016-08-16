@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha1",
   "description": "Software for registering member and generating contracts",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --port 8080",
+    "start": "webpack-dev-server --inline --progress --host 0.0.0.0 --port 8080",
     "test": "karma start",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "json-server": "json-server --watch db.json",
