@@ -19,6 +19,12 @@
             <option *ngFor="let section of user.sections">{{section}}</option>
           </select>
         </div>
+        <div class="form-select-wrapper">
+          <label for="position">Position</label>
+          <select class="form-select" id="position" name="position" required>
+            <option *ngFor="let position of user.position">{{position}}</option>
+          </select>
+        </div>
         <button md-raised-button
                 color="primary"
                 type="submit"

@@ -9,6 +9,12 @@ export class User {
   sections = [
     'VU',
     'VDU'
+  ];
+
+  position = [
+    'Mentor',
+    'ESN\'er',
+    'Both'
   ]
 
 }
