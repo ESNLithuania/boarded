@@ -15,7 +15,7 @@
                   name="surname"
                   [(ngModel)]="user.surname"
                   required></md-input>
-        <div class="form-select-wrapper">
+        <div class="form-select-wrapper float-left">
           <label for="section">Section</label>
           <select class="form-select"
                   id="section"
@@ -24,7 +24,7 @@
             <option *ngFor="let section of user.sections">{{section}}</option>
           </select>
         </div>
-        <div class="form-select-wrapper">
+        <div class="form-select-wrapper float-left">
           <label for="position">Position</label>
           <select class="form-select"
                   id="position"
