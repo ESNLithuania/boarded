@@ -10,3 +10,7 @@ md-input {
 .form-select-wrapper {
     display: block;
 }
+
+.address_group fieldset {
+    border: 1px solid #9e9e9e;
+}
