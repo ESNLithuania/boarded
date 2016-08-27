@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import SharedModule from "./shared/shared.module";
+import SharedModule from "./modules/shared/shared.module";
 import {routing, appRoutingProviders} from "./app.routing";
 
 @NgModule({
