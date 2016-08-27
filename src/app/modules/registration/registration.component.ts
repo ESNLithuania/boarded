@@ -5,4 +5,10 @@ import {Component} from "@angular/core";
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent {
+  sections = [
+    'VU',
+    'VDU'
+  ];
+
+
 }
