@@ -7,6 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import SharedModule from "./modules/shared/shared.module";
 import {routing, appRoutingProviders} from "./app.routing";
 import {HomeModule} from "./modules/home/home.module";
+import {RegistrationModule} from "./modules/registration/registration.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {HomeModule} from "./modules/home/home.module";
     NgbModule,
     SharedModule,
     HomeModule,
+    RegistrationModule,
     routing
   ],
   providers: [
