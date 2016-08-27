@@ -1,7 +1,8 @@
 {
-  "name": "boarded-v2",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "boarded",
+  "version": "0.0.1-alpha1",
+  "license": "Apache2",
+  "author": "Zygimantas Benetis, itcom@esnlithuania.org",
   "angular-cli": {},
   "scripts": {
     "start": "ng serve",
