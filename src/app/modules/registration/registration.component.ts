@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "./user";
 import {RegistrationService} from "./registration.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'esn-registration',
@@ -9,18 +10,11 @@ import {RegistrationService} from "./registration.service";
 export class RegistrationComponent {
   constructor(private registrationService: RegistrationService) {}
   user =  new User();
-  users: User[];
-  errorMessage: string;
 
-  ngOnInit() {
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.registrationService.getUsers().subscribe(
-      users => { this.users = users },
-      error => this.errorMessage = error
-    )
+  onSubmit() {
+    console.log('submitted!');
+    this.registrationService.addUser(this.user)
+      .subscribe((res: User) => console.log(res));
   }
 
   sections = [
