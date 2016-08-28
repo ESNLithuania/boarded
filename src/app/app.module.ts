@@ -8,6 +8,7 @@ import SharedModule from "./modules/shared/shared.module";
 import {routing, appRoutingProviders} from "./app.routing";
 import {HomeModule} from "./modules/home/home.module";
 import {RegistrationModule} from "./modules/registration/registration.module";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {RegistrationModule} from "./modules/registration/registration.module";
     SharedModule,
     HomeModule,
     RegistrationModule,
+    HttpModule,
     routing
   ],
   providers: [
