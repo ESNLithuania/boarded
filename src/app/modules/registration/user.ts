@@ -1,6 +1,6 @@
 export class User {
 
-  constructor(public first_name?: string,
+  constructor(public name?: string,
               public surname?: string,
               public section?: string,
               public birth_date?: Date,
@@ -8,13 +8,6 @@ export class User {
   ) {
     this.address = new Address();
   }
-
-  position = [
-    'Mentor',
-    'ESN\'er',
-    'Both'
-  ]
-
 }
 
 export class Address {

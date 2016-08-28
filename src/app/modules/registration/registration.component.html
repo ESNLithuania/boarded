@@ -1,19 +1,20 @@
 <p>Registration</p>
 
-<form>
+<form #form="ngForm">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" required>
+    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
   </div>
   <div class="form-group">
     <label for="surname">Surname</label>
-    <input type="text" class="form-control" id="surname">
+    <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="user.surname">
   </div>
   <div class="form-group">
     <label for="section">Section</label>
-    <select class="form-control" id="section" required>
+    <select class="form-control" id="section" name="section" [(ngModel)]="user.section" required>
       <option *ngFor="let section of sections" [value]="section">{{section}}</option>
     </select>
   </div>
   <button type="submit" class="btn btn-default">Register</button>
 </form>
+{{user | json}}
