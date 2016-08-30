@@ -1,6 +1,6 @@
 <p>Registration</p>
 
-<form #form="ngForm" (ngSubmit)="onSubmit()">
+<form #form="ngForm" (ngSubmit)="onSubmit()" [hidden]="submitted">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
@@ -17,5 +17,6 @@
   </div>
   <button type="submit" class="btn btn-default">Register</button>
 </form>
-{{user | json}}
-{{users | json}}
+<div class="success" [hidden]="!submitted">
+  You have successfully registered. You will receive confirmation once your LR confirms you.
+</div>
