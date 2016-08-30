@@ -1,20 +1,58 @@
 <p>Registration</p>
 
 <form #form="ngForm" (ngSubmit)="onSubmit()" [hidden]="submitted">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
-  </div>
-  <div class="form-group">
-    <label for="surname">Surname</label>
-    <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="user.surname">
-  </div>
-  <div class="form-group">
-    <label for="section">Section</label>
-    <select class="form-control" id="section" name="section" [(ngModel)]="user.section" required>
-      <option *ngFor="let section of sections" [value]="section">{{section}}</option>
-    </select>
-  </div>
+  <fieldset>
+    <legend>Basic information</legend>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" #name="ngModel" required>
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname</label>
+      <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="user.surname" required>
+    </div>
+    <div class="form-group">
+      <label for="section">Section</label>
+      <select class="form-control" id="section" name="section" [(ngModel)]="user.section" required>
+        <option *ngFor="let section of sections" [value]="section">{{section}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <select class="form-control" id="position" name="position" [(ngModel)]="user.position" required>
+        <option *ngFor="let position of positions" [value]="position">{{position}}</option>
+      </select>
+    </div>
+    <!-- TODO(zygis) only working on chrome!!! -->
+    <div class="form-group">
+      <label for="date_of_birth">Date of birth</label>
+      <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" [(ngModel)]="user.dateOfBirth" required>
+    </div>
+    <div class="form-group">
+      <label for="phone_number">Phone number</label>
+      <input type="tel" class="form-control" id="phone_number" name="phone_number" [(ngModel)]="user.phoneNumber" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
+    </div>
+    <fieldset #address="ngModelGroup" ngModelGroup="address">
+      <legend>Address</legend>
+      <div class="form-group">
+        <label for="street_name">Street name</label>
+        <input type="text" class="form-control" id="street_name" name="street_name" [(ngModel)]="user.address.streetName" required>
+      </div>
+      <div class="form-group">
+        <label for="building_number">Building number</label>
+        <input type="number" class="form-control" id="building_number" name="building_number" [(ngModel)]="user.address.buildingNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.address.city" required>
+      </div>
+    </fieldset>
+  </fieldset>
+
   <button type="submit" class="btn btn-default">Register</button>
 </form>
 <div class="success" [hidden]="!submitted">

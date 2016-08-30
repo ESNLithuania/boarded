@@ -10,7 +10,7 @@ export class RegistrationComponent {
   constructor(private registrationService: RegistrationService) {
   }
 
-  user = new User();
+  user: User = new User();
 
   submitted = false;
 
@@ -25,6 +25,12 @@ export class RegistrationComponent {
     'VU',
     'VDU'
   ];
+
+  positions = [
+    'ESN\'er',
+    'Mentor',
+    'Both'
+  ]
 
 
 }

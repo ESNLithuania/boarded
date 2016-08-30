@@ -3,7 +3,10 @@ export class User {
   constructor(public name?: string,
               public surname?: string,
               public section?: string,
-              public birth_date?: Date,
+              public position?: string,
+              public phoneNumber?: string,
+              public email?: string,
+              public dateOfBirth?: Date,
               public address?: Address
   ) {
     this.address = new Address();
@@ -12,8 +15,8 @@ export class User {
 
 export class Address {
   constructor(
-    public street?: string,
-    public building_number?: number,
+    public streetName?: string,
+    public buildingNumber?: number,
     public city?: string
   ) {}
 }
