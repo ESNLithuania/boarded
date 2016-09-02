@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-@Injectable
+
+@Injectable()
+
 export class UserService {
   private loggedIn = false;
 

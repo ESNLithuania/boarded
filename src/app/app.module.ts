@@ -10,6 +10,7 @@ import {HomeModule} from "./modules/home/home.module";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {HttpModule} from "@angular/http";
 import {AdminModule} from "./modules/admin/admin.module";
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {AdminModule} from "./modules/admin/admin.module";
     routing
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
