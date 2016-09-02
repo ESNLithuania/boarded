@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
-import {User} from "./user";
+import {User} from "../classes/user";
 
 @Injectable()
 export class RegistrationService {
