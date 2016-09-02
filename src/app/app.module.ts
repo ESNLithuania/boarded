@@ -9,6 +9,7 @@ import {routing, appRoutingProviders} from "./app.routing";
 import {HomeModule} from "./modules/home/home.module";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {HttpModule} from "@angular/http";
+import {AdminModule} from "./modules/admin/admin.module";
 
 @NgModule({
   declarations: [
