@@ -3,10 +3,12 @@ import {RegistrationComponent} from "./registration.component";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {RegistrationService} from "./registration.service";
+import {LoginComponent} from "./login.component";
 
 @NgModule({
   declarations: [
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,
@@ -20,4 +22,5 @@ import {RegistrationService} from "./registration.service";
   ]
 })
 
-export class RegistrationModule {}
+export class RegistrationModule {
+}
