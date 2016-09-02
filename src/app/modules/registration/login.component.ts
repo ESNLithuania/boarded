@@ -8,4 +8,7 @@ import {User} from "../../classes/user";
 export class LoginComponent {
   user: User = new User();
 
+  onSubmit() {
+    console.log('submitted');
+  }
 }
