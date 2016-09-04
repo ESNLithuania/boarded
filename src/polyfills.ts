@@ -1,4 +1,5 @@
 // Prefer CoreJS over the polyfills above
+import 'reflect-metadata';
 import 'core-js/es6/symbol';
 import 'core-js/es6/object';
 import 'core-js/es6/function';
