@@ -9,8 +9,6 @@ import {LoginComponent} from "./modules/registration/login.component";
 const appRoutes: Routes = [
   // { path: '**', component: PageNotFoundComponent } //TODO(zygis)
   { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'register', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'admin', component: DashboardComponent }
 ];
 
