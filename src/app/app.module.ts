@@ -11,6 +11,7 @@ import {RegistrationModule} from "./modules/registration/registration.module";
 import {HttpModule} from "@angular/http";
 import {AdminModule} from "./modules/admin/admin.module";
 import {UserService} from "./services/user.service";
+import {RegistrationService} from "./modules/registration/registration.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {UserService} from "./services/user.service";
   ],
   providers: [
     appRoutingProviders,
-    UserService
+    UserService,
+    RegistrationService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

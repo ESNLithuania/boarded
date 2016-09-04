@@ -1,19 +1,16 @@
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
-import {AppComponent} from "./app.component";
 import {HomeComponent} from "./modules/home/home.component";
-import {RegistrationComponent} from "./modules/registration/registration.component";
 import {DashboardComponent} from "./modules/admin/dashboard.component";
-import {LoginComponent} from "./modules/registration/login.component";
+import {registrationRoutes} from "./modules/registration/registration.routing";
 
 const appRoutes: Routes = [
   // { path: '**', component: PageNotFoundComponent } //TODO(zygis)
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'admin', component: DashboardComponent }
+  {path: '', pathMatch: 'full', component: HomeComponent},
+  {path: 'admin', component: DashboardComponent},
+  ...registrationRoutes
 ];
 
-export const appRoutingProviders: any[] = [
-
-];
+export const appRoutingProviders: any[] = [];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

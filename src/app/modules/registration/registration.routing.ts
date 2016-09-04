@@ -2,7 +2,7 @@ import {Routes, RouterModule} from "@angular/router";
 import {RegistrationComponent} from "./registration.component";
 import {ModuleWithProviders} from "@angular/core";
 import {LoginComponent} from "./login.component";
-const registrationRoutes: Routes = [
+export const registrationRoutes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
 ];

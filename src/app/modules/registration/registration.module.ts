@@ -18,7 +18,7 @@ import {LoginComponent} from "./login.component";
     RegistrationComponent
   ],
   providers: [
-    RegistrationService
+    //TODO(zygis): after rc6 routing move registration service here
   ]
 })
 
