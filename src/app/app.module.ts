@@ -10,6 +10,7 @@ import {HttpModule} from "@angular/http";
 import {UserService} from "./services/user.service";
 import {RegistrationService} from "./modules/registration/registration.service";
 import {HomeComponent} from "./components/home.component";
+import {RegistrationModule} from "./modules/registration/registration.module";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {HomeComponent} from "./components/home.component";
     NgbModule,
     SharedModule,
     HttpModule,
+    RegistrationModule,
     routing
   ],
   providers: [

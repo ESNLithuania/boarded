@@ -1,8 +1,8 @@
-import {Routes, RouterModule} from "@angular/router";
+import {Routes, RouterModule, Route} from "@angular/router";
 import {RegistrationComponent} from "./registration.component";
 import {ModuleWithProviders} from "@angular/core";
 import {LoginComponent} from "./login.component";
-export const registrationRoutes: Routes = [
+export const registrationRoutes: Route[] = [
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
 ];
