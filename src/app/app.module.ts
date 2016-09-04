@@ -6,16 +6,15 @@ import {AppComponent} from "./app.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import SharedModule from "./modules/shared/shared.module";
 import {routing, appRoutingProviders} from "./app.routing";
-import {HomeModule} from "./modules/home/home.module";
-import {RegistrationModule} from "./modules/registration/registration.module";
 import {HttpModule} from "@angular/http";
-import {AdminModule} from "./modules/admin/admin.module";
 import {UserService} from "./services/user.service";
 import {RegistrationService} from "./modules/registration/registration.service";
+import {HomeComponent} from "./components/home.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +22,6 @@ import {RegistrationService} from "./modules/registration/registration.service";
     FormsModule,
     NgbModule,
     SharedModule,
-    HomeModule,
     HttpModule,
     routing
   ],
