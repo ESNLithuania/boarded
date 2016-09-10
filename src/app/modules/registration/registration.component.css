@@ -1,0 +1,8 @@
+ngb-tabset .nav-item .nav-link {
+    /*background-color: red;*/
+}
+
+.nav-pills {
+    display: flex;
+    justify-content: center;
+}

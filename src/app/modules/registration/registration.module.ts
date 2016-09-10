@@ -2,8 +2,8 @@ import {NgModule} from "@angular/core";
 import {RegistrationComponent} from "./registration.component";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {RegistrationService} from "./registration.service";
 import {LoginComponent} from "./login.component";
+import {NgbTabsetModule} from "@ng-bootstrap/ng-bootstrap/tabset/tabset.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import {LoginComponent} from "./login.component";
   ],
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    NgbTabsetModule,
   ],
   exports: [
     RegistrationComponent
