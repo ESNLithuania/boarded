@@ -23,7 +23,7 @@ export class RegistrationComponent {
     this.buildForms(fb);
     config.maxDate = {year: 2002, month: 1, day: 30};
     config.minDate = {year: 1950, month: 0, day: 1};
-    config.startDate = {year: 1993, month: 8};
+    config.startDate = {year: 1993, month: 7};
   }
 
   private buildForms(fb: FormBuilder) {
@@ -54,7 +54,6 @@ export class RegistrationComponent {
 
   public toggleSelected() {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
-    console.log(this.basicForm.valid, this.basicForm.value);
   }
 
   private previousTab(event) {
