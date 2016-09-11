@@ -1,9 +1,10 @@
 import {NgModule} from "@angular/core";
 import {RegistrationComponent} from "./registration.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "./login.component";
 import {NgbTabsetModule} from "@ng-bootstrap/ng-bootstrap/tabset/tabset.module";
+import {NgbAlertModule} from "@ng-bootstrap/ng-bootstrap/alert/alert.module";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,8 @@ import {NgbTabsetModule} from "@ng-bootstrap/ng-bootstrap/tabset/tabset.module";
     FormsModule,
     CommonModule,
     NgbTabsetModule,
+    NgbAlertModule,
+    ReactiveFormsModule
   ],
   exports: [
     RegistrationComponent

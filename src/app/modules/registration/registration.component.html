@@ -1,162 +1,174 @@
-<ngb-tabset type="pills"
-            [activeId]="selectedId"
-            [hidden]="submitted">
-  <ngb-tab title="1. Basic info"
-           id="basic-info">
-    <template ngbTabContent>
-      <form #basicForm="ngForm"
-            class="col-lg-8 offset-lg-2"
-            (ngSubmit)="toggleSelected()">
-        <fieldset>
-          <legend>Basic information</legend>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text"
-                   class="form-control"
-                   id="name"
-                   name="name"
-                   [(ngModel)]="user.name"
-                   #name="ngModel"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="surname">Surname</label>
-            <input type="text"
-                   class="form-control"
-                   id="surname"
-                   name="surname"
-                   [(ngModel)]="user.surname"
-                   required>
-          </div>
-          <!-- TODO(zygis) only working on chrome!!! -->
-          <div class="form-group">
-            <label for="date_of_birth">Date of birth</label>
-            <input type="date"
-                   class="form-control"
-                   id="date_of_birth"
-                   name="date_of_birth"
-                   [(ngModel)]="user.dateOfBirth"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="phone_number">Phone number</label>
-            <input type="tel"
-                   class="form-control"
-                   id="phone_number"
-                   name="phone_number"
-                   [(ngModel)]="user.phoneNumber"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email"
-                   class="form-control"
-                   id="email"
-                   name="email"
-                   [(ngModel)]="user.email"
-                   required>
-          </div>
-        </fieldset>
-        <button type="submit"
-                class="btn btn-outline-primary pull-right"
-        >Next
-        </button>
+<div class="col-lg-8 offset-lg-2">
+  <ngb-alert [dismissible]="false"
+             [hidden]="firstOrSecondFormSkipped()"
+             type="danger">
+    <strong>Basic information</strong> or <strong>Section information</strong>
+    is invalid
+  </ngb-alert>
+</div>
+<div class="col-lg-8 offset-lg-2">
+  <ngb-tabset type="pills"
+              [activeId]="selectedId"
+              [hidden]="submitted"
+              (change)="beforeChange()">
+    <ngb-tab title="1. Basic info"
+             id="basic-info">
+      <template ngbTabContent>
+        <form [formGroup]="basicForm"
+              (ngSubmit)="toggleSelected()"
+        >
+          <fieldset>
+            <legend>Basic information</legend>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text"
+                     class="form-control"
+                     id="name"
+                     name="name"
+                     formControlName="userName"
+                     required>
+            </div>
+            <div class="form-group">
+              <label for="surname">Surname</label>
+              <input type="text"
+                     class="form-control"
+                     id="surname"
+                     name="surname"
+                     formControlName="userSurname"
+                     required>
+            </div>
+            <!-- TODO(zygis) only working on chrome!!! -->
+            <div class="form-group">
+              <label for="date_of_birth">Date of birth</label>
+              <input type="date"
+                     class="form-control"
+                     id="date_of_birth"
+                     name="date_of_birth"
+                     formControlName="userDateOfBirth"
+                     required>
+            </div>
+            <div class="form-group">
+              <label for="phone_number">Phone number</label>
+              <input type="tel"
+                     class="form-control"
+                     id="phone_number"
+                     name="phone_number"
+                     formControlName="userPhoneNumber"
+                     required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email"
+                     class="form-control"
+                     id="email"
+                     name="email"
+                     formControlName="userEmail"
+                     required>
+            </div>
+          </fieldset>
+          <button type="submit"
+                  class="btn btn-outline-primary pull-right"
+          >Next
+          </button>
 
-      </form>
-    </template>
-  </ngb-tab>
-  <ngb-tab title="2. Section"
-           id="section-info">
-    <template ngbTabContent>
-      <form #sectionForm="ngForm"
-            class="col-lg-8 offset-lg-2"
-            (ngSubmit)="toggleSelected()"
-      >
-        <fieldset>
-          <legend>Section information</legend>
-          <div class="
+        </form>
+      </template>
+    </ngb-tab>
+    <ngb-tab title="2. Section"
+             id="section-info">
+      <template ngbTabContent>
+        <form [formGroup]="sectionForm"
+              class="col-lg-8 offset-lg-2"
+              (ngSubmit)="toggleSelected()"
+        >
+          <fieldset>
+            <legend>Section information</legend>
+            <div class="
             form-group
       ">
-            <label for="section">Section</label>
-            <select class="form-control"
-                    id="section"
-                    name="section"
-                    [(ngModel)]="user.section"
-                    required>
-              <option *ngFor="let section of sections"
-                      [value]="section">{{section}}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="position">Position</label>
-            <select class="form-control"
-                    id="position"
-                    name="position"
-                    [(ngModel)]="user.position"
-                    required>
-              <option *ngFor="let position of positions"
-                      [value]="position">{{position}}
-              </option>
-            </select>
-          </div>
-        </fieldset>
-        <button class="btn btn-outline-primary pull-right"
-        >Next
-        </button>
-      </form>
-    </template>
-  </ngb-tab>
-  <ngb-tab title="3. Address"
-           id="address-info">
-    <template ngbTabContent>
-      <form #addressForm="ngForm"
-            class="col-lg-8 offset-lg-2"
-            (ngSubmit)="onSubmit()"
-            [hidden]="submitted">
-        <fieldset #address="ngModelGroup"
-                  ngModelGroup="address">
-          <legend>Address</legend>
-          <div class="form-group">
-            <label for="street_name">Street name</label>
-            <input type="text"
-                   class="form-control"
-                   id="street_name"
-                   name="street_name"
-                   [(ngModel)]="user.address.streetName"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="building_number">Building number</label>
-            <input type="text"
-                   class="form-control"
-                   id="building_number"
-                   name="building_number"
-                   [(ngModel)]="user.address.buildingNumber"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text"
-                   class="form-control"
-                   id="city"
-                   name="city"
-                   [(ngModel)]="user.address.city"
-                   required>
-          </div>
-        </fieldset>
-        <button type="submit"
-                class="btn btn-primary pull-right">Finish registration
-        </button>
-      </form>
-    </template>
-  </ngb-tab>
-</ngb-tabset>
+              <label for="section">Section</label>
+              <select class="form-control"
+                      id="section"
+                      name="section"
+                      formControlName="userSection"
+                      required>
+                <option *ngFor="let section of sections"
+                        [value]="section">{{section}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="position">Position</label>
+              <select class="form-control"
+                      id="position"
+                      name="position"
+                      formControlName="userPosition"
+                      required>
+                <option *ngFor="let position of positions"
+                        [value]="position">{{position}}
+                </option>
+              </select>
+            </div>
+          </fieldset>
+          <button class="btn btn-outline-primary pull-right"
+          >Next
+          </button>
+        </form>
+      </template>
+    </ngb-tab>
+    <ngb-tab title="3. Address"
+             id="address-info">
+      <template ngbTabContent>
+        <form [formGroup]="addressForm"
+              class="col-lg-8 offset-lg-2"
+              (ngSubmit)="onSubmit()"
+              [hidden]="submitted"
+        >
+          <fieldset>
+            <legend>Address</legend>
+            <div class="form-group">
+              <label for="street_name">Street name</label>
+              <input type="text"
+                     class="form-control"
+                     id="street_name"
+                     name="street_name"
+                     formControlName="userAddressStreetName"
+                     required>
+            </div>
+            <div class="form-group">
+              <label for="building_number">Building number</label>
+              <input type="text"
+                     class="form-control"
+                     id="building_number"
+                     name="building_number"
+                     formControlName="userAddressBuildingNumber"
+                     required>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text"
+                     class="form-control"
+                     id="city"
+                     name="city"
+                     formControlName="userAddressCity"
+                     required>
+            </div>
+          </fieldset>
+          <button type="submit"
+                  [disabled]="!areFormsValid()"
+                  class="btn btn-primary pull-right">Finish registration
+          </button>
+        </form>
+      </template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
 
 <div class="success"
      [hidden]="!submitted">
   <div class="jumbotron">
     <h1 class="display-4">You are almost there!</h1>
-    <p class="lead"> What's left is for your LR to confirm you. You will receive a letter once Local representative approves you</p>
+    <p class="lead"> What's left is for your LR to confirm you. You will receive
+      a letter once Local representative approves you</p>
   </div>
 </div>
