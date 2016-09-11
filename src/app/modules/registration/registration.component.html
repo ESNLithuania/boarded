@@ -9,10 +9,11 @@
 <div class="col-lg-8 offset-lg-2">
   <ngb-tabset type="pills"
               [activeId]="selectedId"
-              [hidden]="submitted"
-              (change)="beforeChange()">
+              [hidden]="submitted">
     <ngb-tab title="1. Basic info"
-             id="basic-info">
+             id="basic-info"
+             [disabled]="true"
+    >
       <template ngbTabContent>
         <form [formGroup]="basicForm"
               (ngSubmit)="toggleSelected()"
@@ -67,16 +68,15 @@
             </div>
           </fieldset>
           <button type="submit"
-                  class="btn btn-outline-primary pull-right"
+                  class="btn btn-primary pull-right"
           >Next
           </button>
-
         </form>
       </template>
     </ngb-tab>
     <ngb-tab title="2. Section"
              id="section-info"
-             [disabled]="isSectionTabDisabled()"
+             [disabled]="true"
     >
       <template ngbTabContent>
         <form [formGroup]="sectionForm"
@@ -112,15 +112,18 @@
               </select>
             </div>
           </fieldset>
-          <button class="btn btn-outline-primary pull-right"
+          <button class="btn btn-primary pull-right"
           >Next
+          </button>
+          <button class="btn btn-outline-primary pull-left" (click)="previousTab()"
+          >Previous
           </button>
         </form>
       </template>
     </ngb-tab>
     <ngb-tab title="3. Address"
              id="address-info"
-             [disabled]="isAddressTabDisabled()"
+             [disabled]="true"
     >
       <template ngbTabContent>
         <form [formGroup]="addressForm"
@@ -161,6 +164,9 @@
           <button type="submit"
                   [disabled]="!areFormsValid()"
                   class="btn btn-primary pull-right">Finish registration
+          </button>
+          <button class="btn btn-outline-primary pull-left" (click)="previousTab()"
+          >Previous
           </button>
         </form>
       </template>

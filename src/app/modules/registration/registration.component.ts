@@ -40,7 +40,8 @@ export class RegistrationComponent {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
   }
 
-  private beforeChange(event) {
+  private previousTab() {
+    this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) - 1)];
   }
 
   user: User = new User();
@@ -62,14 +63,6 @@ export class RegistrationComponent {
 
   private areFormsValid() {
     return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
-  }
-
-  private isSectionTabDisabled() {
-    return !this.basicForm.valid;
-  }
-
-  private isAddressTabDisabled() {
-    return !(this.basicForm.valid && this.sectionForm.valid);
   }
 
   sections = [
