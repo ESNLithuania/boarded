@@ -9,7 +9,6 @@ export class User {
               public dateOfBirth?: Date,
               public address?: Address
   ) {
-    this.address = new Address();
   }
 }
 

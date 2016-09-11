@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from "@angular/core";
-import {User} from "../../classes/user";
+import {User, Address} from "../../classes/user";
 import {RegistrationService} from "./registration.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
@@ -44,13 +44,17 @@ export class RegistrationComponent {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) - 1)];
   }
 
-  user: User = new User();
-
   submitted = false;
 
   onSubmit() {
+    //We can skip validation since we validate using html5
+    let basic = this.basicForm.value;
+    let section = this.sectionForm.value;
+    let address = this.addressForm.value;
+    let user: User = new User(basic.userName, basic.userSurname, section.userSection, section.userPosition, basic.userPhoneNumber, basic.userEmail, basic.userDateOfBirth, new Address(address.userAddressStreetName, address.userAddressBuildingNumber, address.userAddressCity));
+
     //show that form some section is invalid
-    this.registrationService.addUser(this.user)
+    this.registrationService.addUser(user)
       .subscribe((res: User) => {
         this.submitted = true;
       });
@@ -58,7 +62,7 @@ export class RegistrationComponent {
 
   private firstOrSecondFormSkipped() {
     return !((!this.basicForm.valid
-      || !this.sectionForm.valid) && this.addressForm.valid);
+    || !this.sectionForm.valid) && this.addressForm.valid);
   }
 
   private areFormsValid() {
