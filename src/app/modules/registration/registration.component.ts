@@ -21,8 +21,9 @@ export class RegistrationComponent {
 
   constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
     this.buildForms(fb);
-    config.maxDate = {year: 2002, month: 0, day: 1};
+    config.maxDate = {year: 2002, month: 1, day: 30};
     config.minDate = {year: 1950, month: 0, day: 1};
+    config.startDate = {year: 1993, month: 8};
   }
 
   private buildForms(fb: FormBuilder) {
