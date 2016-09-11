@@ -15,6 +15,5 @@ export class LoginComponent {
 
   onSubmit() {
     console.log(this.userEmail, this.userPassword);
-
   }
 }

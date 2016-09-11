@@ -11,6 +11,7 @@ import {UserService} from "./services/user.service";
 import {RegistrationService} from "./modules/registration/registration.service";
 import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
+import {DashboardModule} from "./modules/dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {RegistrationModule} from "./modules/registration/registration.module";
     SharedModule,
     HttpModule,
     RegistrationModule,
+    DashboardModule,
     routing
   ],
   providers: [
