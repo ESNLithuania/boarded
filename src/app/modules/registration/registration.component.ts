@@ -40,7 +40,7 @@ export class RegistrationComponent {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
   }
 
-  private previousTab() {
+  private previousTab(event) {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) - 1)];
   }
 

@@ -115,7 +115,8 @@
           <button class="btn btn-primary pull-right"
           >Next
           </button>
-          <button class="btn btn-outline-primary pull-left" (click)="previousTab()"
+          <button type="button" class="btn btn-outline-primary pull-left"
+                  (click)="previousTab()"
           >Previous
           </button>
         </form>
@@ -165,7 +166,9 @@
                   [disabled]="!areFormsValid()"
                   class="btn btn-primary pull-right">Finish registration
           </button>
-          <button class="btn btn-outline-primary pull-left" (click)="previousTab()"
+          <button type="button"
+                  class="btn btn-outline-primary pull-left"
+                  (click)="previousTab(event)"
           >Previous
           </button>
         </form>
