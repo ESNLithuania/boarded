@@ -1,20 +1,35 @@
 import {Component, ViewEncapsulation} from "@angular/core";
 import {User, Address} from "../../classes/user";
 import {RegistrationService} from "./registration.service";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidatorFn
+} from "@angular/forms";
+import {NgbDatepickerConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'esn-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
+  providers: [NgbDatepickerConfig],
   encapsulation: ViewEncapsulation.None
 })
 export class RegistrationComponent {
-  constructor(fb: FormBuilder, private registrationService: RegistrationService) {
+
+  constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
+    this.buildForms(fb);
+    config.maxDate = {year: 2002, month: 0, day: 1};
+    config.minDate = {year: 1950, month: 0, day: 1};
+  }
+
+  private buildForms(fb: FormBuilder) {
     this.basicForm = fb.group({
       "userName": ["", Validators.required],
       "userSurname": ["", Validators.required],
-      "userDateOfBirth": ["", Validators.required],
+      "userDateOfBirth": ["", [Validators.required, dateIsPickedAndValid()]],
       "userPhoneNumber": ["", Validators.required],
       "userEmail": ["", Validators.required]
     });
@@ -38,6 +53,7 @@ export class RegistrationComponent {
 
   public toggleSelected() {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
+    console.log(this.basicForm.valid, this.basicForm.value);
   }
 
   private previousTab(event) {
@@ -64,6 +80,7 @@ export class RegistrationComponent {
     return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
   }
 
+
   sections = [
     'VU',
     'VDU'
@@ -75,5 +92,13 @@ export class RegistrationComponent {
     'Both'
   ]
 
+}
 
+export function dateIsPickedAndValid(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} => {
+    const date = control.value;
+    if(date == null) {}
+    if(date.day != null) { return null; }
+    return {'dateOfBirth': {date}};
+  };
 }

@@ -6,9 +6,10 @@ export class User {
               public position?: string,
               public phoneNumber?: string,
               public email?: string,
-              public dateOfBirth?: Date,
+              public dateOfBirth?,
               public address?: Address
   ) {
+    if(!address) { this.address = new Address(); }
   }
 }
 
