@@ -7,6 +7,10 @@ ngb-tabset .nav-item .nav-link {
     justify-content: center;
 }
 
+.nav-item .nav-link.disabled {
+    cursor: default;
+}
+
 .pull-right {
     float: right;
 }
