@@ -75,7 +75,9 @@
       </template>
     </ngb-tab>
     <ngb-tab title="2. Section"
-             id="section-info">
+             id="section-info"
+             [disabled]="isSectionTabDisabled()"
+    >
       <template ngbTabContent>
         <form [formGroup]="sectionForm"
               class="col-lg-8 offset-lg-2"
@@ -117,7 +119,9 @@
       </template>
     </ngb-tab>
     <ngb-tab title="3. Address"
-             id="address-info">
+             id="address-info"
+             [disabled]="isAddressTabDisabled()"
+    >
       <template ngbTabContent>
         <form [formGroup]="addressForm"
               class="col-lg-8 offset-lg-2"

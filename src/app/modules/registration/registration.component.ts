@@ -64,6 +64,14 @@ export class RegistrationComponent {
     return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
   }
 
+  private isSectionTabDisabled() {
+    return !this.basicForm.valid;
+  }
+
+  private isAddressTabDisabled() {
+    return !(this.basicForm.valid && this.sectionForm.valid);
+  }
+
   sections = [
     'VU',
     'VDU'
