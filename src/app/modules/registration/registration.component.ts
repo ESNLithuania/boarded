@@ -60,11 +60,6 @@ export class RegistrationComponent {
       });
   }
 
-  private firstOrSecondFormSkipped() {
-    return !((!this.basicForm.valid
-    || !this.sectionForm.valid) && this.addressForm.valid);
-  }
-
   private areFormsValid() {
     return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
   }

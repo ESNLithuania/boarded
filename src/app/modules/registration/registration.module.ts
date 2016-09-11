@@ -15,7 +15,6 @@ import {NgbAlertModule} from "@ng-bootstrap/ng-bootstrap/alert/alert.module";
     FormsModule,
     CommonModule,
     NgbTabsetModule,
-    NgbAlertModule,
     ReactiveFormsModule
   ],
   exports: [

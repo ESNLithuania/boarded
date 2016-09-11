@@ -14,3 +14,7 @@ ngb-tabset .nav-item .nav-link {
 .pull-left {
     float: left;
 }
+
+form {
+    margin-top: 0.5rem;
+}
