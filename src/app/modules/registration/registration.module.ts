@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "./login.component";
 import {NgbTabsetModule} from "@ng-bootstrap/ng-bootstrap/tabset/tabset.module";
-import {NgbAlertModule} from "@ng-bootstrap/ng-bootstrap/alert/alert.module";
+import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker.module";
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import {NgbAlertModule} from "@ng-bootstrap/ng-bootstrap/alert/alert.module";
     FormsModule,
     CommonModule,
     NgbTabsetModule,
+    NgbDatepickerModule,
     ReactiveFormsModule
   ],
   exports: [
