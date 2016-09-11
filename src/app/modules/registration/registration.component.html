@@ -1,5 +1,6 @@
 <ngb-tabset type="pills"
-            [activeId]="selectedId">
+            [activeId]="selectedId"
+            [hidden]="submitted">
   <ngb-tab title="1. Basic info"
            id="basic-info">
     <template ngbTabContent>
@@ -154,6 +155,8 @@
 
 <div class="success"
      [hidden]="!submitted">
-  You have successfully registered. You will receive confirmation once your LR
-  confirms you.
+  <div class="jumbotron">
+    <h1 class="display-4">You are almost there!</h1>
+    <p class="lead"> What's left is for your LR to confirm you. You will receive a letter once Local representative approves you</p>
+  </div>
 </div>
