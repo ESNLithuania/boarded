@@ -6,3 +6,7 @@ ngb-tabset .nav-item .nav-link {
     display: flex;
     justify-content: center;
 }
+
+.pull-right {
+    float: right;
+}

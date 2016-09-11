@@ -1,10 +1,11 @@
-<ngb-tabset type="pills">
-  <ngb-tab title="1. Basic info">
+<ngb-tabset type="pills"
+            [activeId]="selectedId">
+  <ngb-tab title="1. Basic info"
+           id="basic-info">
     <template ngbTabContent>
-      <form #form="ngForm"
+      <form #basicForm="ngForm"
             class="col-lg-8 offset-lg-2"
-            (ngSubmit)="onSubmit()"
-            [hidden]="submitted">
+            (ngSubmit)="toggleSelected()">
         <fieldset>
           <legend>Basic information</legend>
           <div class="form-group">
@@ -56,20 +57,25 @@
           </div>
         </fieldset>
         <button type="submit"
-                class="btn btn-default">Register
+                class="btn btn-outline-primary pull-right"
+        >Next
         </button>
+
       </form>
     </template>
   </ngb-tab>
-  <ngb-tab title="2. Section">
+  <ngb-tab title="2. Section"
+           id="section-info">
     <template ngbTabContent>
-      <form #form="ngForm"
+      <form #sectionForm="ngForm"
             class="col-lg-8 offset-lg-2"
-            (ngSubmit)="onSubmit()"
-            [hidden]="submitted">
+            (ngSubmit)="toggleSelected()"
+      >
         <fieldset>
           <legend>Section information</legend>
-          <div class="form-group">
+          <div class="
+            form-group
+      ">
             <label for="section">Section</label>
             <select class="form-control"
                     id="section"
@@ -94,43 +100,57 @@
             </select>
           </div>
         </fieldset>
-        <button type="submit"
-                class="btn btn-default">Register
+        <button class="btn btn-outline-primary pull-right"
+        >Next
         </button>
       </form>
     </template>
   </ngb-tab>
-  <ngb-tab title="3. Address">
+  <ngb-tab title="3. Address"
+           id="address-info">
     <template ngbTabContent>
-      <form #form="ngForm"
+      <form #addressForm="ngForm"
             class="col-lg-8 offset-lg-2"
             (ngSubmit)="onSubmit()"
             [hidden]="submitted">
-        <fieldset #address="ngModelGroup" ngModelGroup="address">
+        <fieldset #address="ngModelGroup"
+                  ngModelGroup="address">
           <legend>Address</legend>
           <div class="form-group">
             <label for="street_name">Street name</label>
-            <input type="text" class="form-control" id="street_name" name="street_name" [(ngModel)]="user.address.streetName" required>
+            <input type="text"
+                   class="form-control"
+                   id="street_name"
+                   name="street_name"
+                   [(ngModel)]="user.address.streetName"
+                   required>
           </div>
           <div class="form-group">
             <label for="building_number">Building number</label>
-            <input type="text" class="form-control" id="building_number" name="building_number" [(ngModel)]="user.address.buildingNumber" required>
+            <input type="text"
+                   class="form-control"
+                   id="building_number"
+                   name="building_number"
+                   [(ngModel)]="user.address.buildingNumber"
+                   required>
           </div>
           <div class="form-group">
             <label for="city">City</label>
-            <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.address.city" required>
+            <input type="text"
+                   class="form-control"
+                   id="city"
+                   name="city"
+                   [(ngModel)]="user.address.city"
+                   required>
           </div>
         </fieldset>
         <button type="submit"
-                class="btn btn-default">Register
+                class="btn btn-primary pull-right">Finish registration
         </button>
       </form>
     </template>
   </ngb-tab>
 </ngb-tabset>
-<div class="progress-tabs">
-
-</div>
 
 <div class="success"
      [hidden]="!submitted">
