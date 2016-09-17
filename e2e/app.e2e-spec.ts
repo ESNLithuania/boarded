@@ -1,10 +1,10 @@
-import { BoardedV2Page } from './app.po';
+import { BoardedPage } from './app.po';
 
-describe('boarded-v2 App', function() {
-  let page: BoardedV2Page;
+describe('boarded App', function() {
+  let page: BoardedPage;
 
   beforeEach(() => {
-    page = new BoardedV2Page();
+    page = new BoardedPage();
   });
 
   it('should display message saying app works', () => {

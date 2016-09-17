@@ -1,4 +1,6 @@
-export class BoardedV2Page {
+import { browser, element, by } from 'protractor/globals';
+
+export class BoardedPage {
   navigateTo() {
     return browser.get('/');
   }
