@@ -19,12 +19,36 @@ import {NgbDatepickerConfig} from "@ng-bootstrap/ng-bootstrap";
 })
 export class RegistrationComponent {
 
+  basicForm: FormGroup;
+  sectionForm: FormGroup;
+  addressForm: FormGroup;
+
+  tabIds = ['basic-info', 'section-info', 'address-info'];
+  selectedId = this.tabIds[0];
+  submitted = false;
+
+  sections = [
+    'VU',
+    'VDU'
+  ];
+
+  positions = [
+    'ESN\'er',
+    'Mentor',
+    'Both'
+  ];
+
   constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
     this.buildForms(fb);
     config.maxDate = {year: 2002, month: 1, day: 30};
     config.minDate = {year: 1950, month: 0, day: 1};
     config.startDate = {year: 1993, month: 7};
   }
+
+  public toggleSelected() {
+    this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
+  }
+
 
   private buildForms(fb: FormBuilder) {
     this.basicForm = fb.group({
@@ -45,22 +69,9 @@ export class RegistrationComponent {
     });
   }
 
-  basicForm: FormGroup;
-  sectionForm: FormGroup;
-  addressForm: FormGroup;
-
-  tabIds = ['basic-info', 'section-info', 'address-info'];
-  selectedId = this.tabIds[0];
-
-  public toggleSelected() {
-    this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
-  }
-
   private previousTab(event) {
     this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) - 1)];
   }
-
-  submitted = false;
 
   onSubmit() {
     //We can skip validation since we validate using html5
@@ -79,18 +90,6 @@ export class RegistrationComponent {
   private areFormsValid() {
     return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
   }
-
-
-  sections = [
-    'VU',
-    'VDU'
-  ];
-
-  positions = [
-    'ESN\'er',
-    'Mentor',
-    'Both'
-  ]
 
 }
 

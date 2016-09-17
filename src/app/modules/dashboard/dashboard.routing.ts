@@ -1,5 +1,8 @@
-import {RouterModule, Route} from "@angular/router";
-import {ModuleWithProviders} from "@angular/core";
+import {
+  RouterModule, Route, CanActivate,
+  ActivatedRouteSnapshot, RouterStateSnapshot
+} from "@angular/router";
+import {ModuleWithProviders, Injectable} from "@angular/core";
 import {DashboardComponent} from "./dashboard.component";
 import {LoginComponent} from "./login.component";
 import {ManageUsersComponent} from "./manage-users.component";
@@ -7,6 +10,7 @@ export const dashboardRoutes: Route[] = [
   {
     path: 'clr',
     component: DashboardComponent,
+    // canActivate: [canActivateDashboard],
     children: [
       {
         path: '',
