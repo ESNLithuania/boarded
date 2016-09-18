@@ -8,13 +8,14 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 import {Observable} from "rxjs";
+import {CommonModule} from "@angular/common";
 @NgModule({
   declarations: [
     DashboardComponent,
     LoginComponent,
     ManageUsersComponent
   ],
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   exports: [],
   // providers: [canActivateDashboard, UserToken, Permissions]
 })
