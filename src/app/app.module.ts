@@ -12,7 +12,7 @@ import {RegistrationService} from "./modules/registration/registration.service";
 import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
-import { environment } from './environments/environment';
+import { environment } from '../environments/environment';
 import {AngularFireModule} from "angularfire2";
 
 //noinspection TypeScriptUnresolvedVariable
