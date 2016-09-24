@@ -13,10 +13,6 @@ import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
-import {AngularFireModule} from "angularfire2";
-
-//noinspection TypeScriptUnresolvedVariable
-export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
   declarations: [
@@ -25,7 +21,6 @@ export const firebaseConfig = environment.firebaseConfig;
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     CommonModule,
     FormsModule,
     NgbModule,
