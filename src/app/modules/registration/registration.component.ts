@@ -1,14 +1,14 @@
-import {Component, ViewEncapsulation} from "@angular/core";
-import {User, Address} from "../../classes/user";
-import {RegistrationService} from "./registration.service";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {User, Address} from '../../classes/user';
+import {RegistrationService} from './registration.service';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   AbstractControl,
   ValidatorFn
-} from "@angular/forms";
-import {NgbDatepickerConfig} from "@ng-bootstrap/ng-bootstrap";
+} from '@angular/forms';
+import {NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'esn-registration',
@@ -23,8 +23,22 @@ export class RegistrationComponent {
   sectionForm: FormGroup;
   addressForm: FormGroup;
 
-  tabIds = ['basic-info', 'section-info', 'address-info'];
-  selectedId = this.tabIds[0];
+  tabs = [
+    {
+      name: 'basic-info',
+      form: this.basicForm
+    },
+    {
+      name: 'section-info',
+      form: this.sectionForm
+    },
+    {
+      name: 'address-info',
+      form: this.sectionForm
+    }
+  ];
+
+  selectedForm = this.tabs[0];
   submitted = false;
 
   sections = [
@@ -40,15 +54,25 @@ export class RegistrationComponent {
 
   constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
     this.buildForms(fb);
-    config.maxDate = {year: 2002, month: 1, day: 30};
-    config.minDate = {year: 1950, month: 0, day: 1};
-    config.startDate = {year: 1993, month: 7};
+    config.maxDate = {
+      year: 2002,
+      month: 1,
+      day: 30
+    };
+    config.minDate = {
+      year: 1950,
+      month: 0,
+      day: 1
+    };
+    config.startDate = {
+      year: 1993,
+      month: 7
+    };
   }
 
   public toggleSelected() {
-    this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) + 1)];
+    this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) + 1];
   }
-
 
   private buildForms(fb: FormBuilder) {
     this.basicForm = fb.group({
@@ -70,11 +94,12 @@ export class RegistrationComponent {
   }
 
   private previousTab(event) {
-    this.selectedId = this.tabIds[(this.tabIds.indexOf(this.selectedId) - 1)];
+    this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) - 1];
   }
 
   onSubmit() {
     //We can skip validation since we validate using html5
+    //No we cannot because of safari -__-"
     let basic = this.basicForm.value;
     let section = this.sectionForm.value;
     let address = this.addressForm.value;
@@ -96,8 +121,11 @@ export class RegistrationComponent {
 export function dateIsPickedAndValid(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     const date = control.value;
-    if(date == null) {}
-    if(date.day != null) { return null; }
+    if (date == null) {
+    }
+    if (date.day != null) {
+      return null;
+    }
     return {'dateOfBirth': {date}};
   };
 }
