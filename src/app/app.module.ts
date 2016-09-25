@@ -15,6 +15,7 @@ import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import {AuthService} from './services/auth.service';
+import {RequestService} from './services/request.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {AuthService} from './services/auth.service';
     UserService,
     RegistrationService,
     AUTH_PROVIDERS,
-    AuthService
+    AuthService,
+    RequestService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
