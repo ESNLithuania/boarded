@@ -19,27 +19,17 @@ import {NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegistrationComponent {
 
-  basicForm: FormGroup;
-  sectionForm: FormGroup;
-  addressForm: FormGroup;
+  private basicForm: FormGroup;
+  private sectionForm: FormGroup;
+  private addressForm: FormGroup;
 
-  tabs = [
-    {
-      name: 'basic-info',
-      form: this.basicForm
-    },
-    {
-      name: 'section-info',
-      form: this.sectionForm
-    },
-    {
-      name: 'address-info',
-      form: this.sectionForm
-    }
-  ];
+  private tabs: Array<any>;
+  private selectedForm;
 
-  selectedForm = this.tabs[0];
-  submitted = false;
+  private submitted = false;
+
+  private formErrorMsg = 'Some of form fields are not valid';
+  private formErrorVisible = false;
 
   sections = [
     'VU',
@@ -54,6 +44,7 @@ export class RegistrationComponent {
 
   constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
     this.buildForms(fb);
+    this.buildTabs();
     config.maxDate = {
       year: 2002,
       month: 1,
@@ -71,7 +62,7 @@ export class RegistrationComponent {
   }
 
   public toggleSelected() {
-    this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) + 1];
+      this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) + 1];
   }
 
   private buildForms(fb: FormBuilder) {
@@ -93,11 +84,30 @@ export class RegistrationComponent {
     });
   }
 
+  private buildTabs() {
+    this.tabs = [
+      {
+        name: 'basic-info',
+        form: this.basicForm
+      },
+      {
+        name: 'section-info',
+        form: this.sectionForm
+      },
+      {
+        name: 'address-info',
+        form: this.sectionForm
+      }
+    ];
+
+    this.selectedForm = this.tabs[0];
+  }
+
   private previousTab(event) {
     this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) - 1];
   }
 
-  onSubmit() {
+  private onSubmit() {
     //We can skip validation since we validate using html5
     //No we cannot because of safari -__-"
     let basic = this.basicForm.value;
