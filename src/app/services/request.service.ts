@@ -10,12 +10,20 @@ export class RequestService {
   }
 
   //todo(better url handling)
-  post(url, json): Observable<any> {
+  public post(url, json): Observable<any> {
     let postHeaders = new Headers();
     postHeaders.append('Content-type', 'application/json');
 
     return this.http
       .post(this.url + url, json, {headers: postHeaders})
       .map(res => res.json());
+  }
+
+  public get auth(): any {
+    return {
+        login: (json) => {
+          return this.post('auth/authenticate', JSON.stringify(json))
+        }
+      }
   }
 }
