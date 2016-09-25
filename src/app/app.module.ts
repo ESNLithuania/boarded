@@ -13,6 +13,8 @@ import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
+import {AuthService} from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { environment } from '../environments/environment';
   providers: [
     appRoutingProviders,
     UserService,
-    RegistrationService
+    RegistrationService,
+    AuthService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

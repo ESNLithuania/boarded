@@ -1,5 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {User} from '../classes/user';
+import {Observable} from 'rxjs';
+import {Http} from '@angular/http';
 
 @Injectable()
 
@@ -8,6 +10,10 @@ export class UserService {
 
   constructor(private http: Http) {
     this.loggedIn = !!localStorage.getItem('auth_token');
+  }
+
+  public getUsers(): Observable<any> {
+    return this.http.get('http://homestead.app/api/admin/members')
   }
 
   public login(email, password) {

@@ -1,7 +1,9 @@
 <p>Users!</p>
 
 <ul>
-  <li class="text" *ngFor="let user of users">
-    {{user}}
-  </li>
+  <!--<li class="text" *ngFor="let user of users | async">-->
+    <!--{{user}}-->
+  <!--</li>-->
 </ul>
+
+<button (click)="login()">Login!</button>
