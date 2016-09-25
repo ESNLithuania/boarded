@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {tokenNotExpired, AuthHttp} from 'angular2-jwt';
+import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs';
 
 @Injectable()
 
 export class AuthService {
 
-  constructor(private http: Http) {
+  constructor(private authHttp: AuthHttp, private http: Http) {
     // this.loggedIn = !!localStorage.getItem('auth_token');
   }
 
@@ -27,11 +28,14 @@ export class AuthService {
   // }
 
   login(email = 'admin@admin.lt', password = 'secret'): Observable<boolean> {
+    let headers = new Headers();
+    headers.append('Content-type', 'application/json');
+
     return this.http
-      .post('http://homestead.app/api/admin/users', JSON.stringify({
+      .post('http://homestead.app/api/auth/authenticate', JSON.stringify({
       email: email,
       password: password
-    }))
+    }), {headers: headers})
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let token = response.json() && response.json().token;
@@ -56,7 +60,7 @@ export class AuthService {
   }
 
   public loggedIn() {
-    // return tokenNotExpired();
+    return tokenNotExpired();
   }
 
   private handleError(error: any) {

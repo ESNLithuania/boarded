@@ -13,6 +13,7 @@ import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
+import {AUTH_PROVIDERS} from 'angular2-jwt';
 import {AuthService} from './services/auth.service';
 
 
@@ -30,12 +31,13 @@ import {AuthService} from './services/auth.service';
     HttpModule,
     RegistrationModule,
     DashboardModule,
-    routing
+    routing,
   ],
   providers: [
     appRoutingProviders,
     UserService,
     RegistrationService,
+    AUTH_PROVIDERS,
     AuthService
   ],
   entryComponents: [AppComponent],
