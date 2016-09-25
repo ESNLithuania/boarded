@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {tokenNotExpired, AuthHttp} from 'angular2-jwt';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 import {RequestService} from './request.service';
@@ -8,7 +7,7 @@ import {RequestService} from './request.service';
 
 export class AuthService {
 
-  constructor(private authHttp: AuthHttp, private http: Http, private request: RequestService) {
+  constructor(private http: Http, private request: RequestService) {
     // this.loggedIn = !!localStorage.getItem('auth_token');
   }
 
@@ -36,19 +35,14 @@ export class AuthService {
         password: password
       })
       .map((response) => {
-        // login successful if there's a jwt token in the response
         let token = response && response.token;
         if (token) {
-          // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('auth_token', JSON.stringify({
             email: email,
             token: token
           }));
-
-          // return true to indicate successful login
           return true;
         } else {
-          // return false to indicate failed login
           return false;
         }
       })
@@ -59,7 +53,7 @@ export class AuthService {
   }
 
   public loggedIn() {
-    return tokenNotExpired();
+    // return tokenNotExpired();
   }
 
   private handleError(error: any) {

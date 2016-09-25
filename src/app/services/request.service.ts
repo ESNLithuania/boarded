@@ -9,7 +9,6 @@ export class RequestService {
   constructor(private http: Http) {
   }
 
-  //todo(better url handling)
   public post(url, json): Observable<any> {
     let postHeaders = new Headers();
     postHeaders.append('Content-type', 'application/json');
@@ -19,11 +18,25 @@ export class RequestService {
       .map(res => res.json());
   }
 
+  public get(url): Observable<any> {
+    return this.http
+      .get(this.url + url)
+      .map(res => res.json());
+  }
+
   public get auth(): any {
     return {
-        login: (json) => {
-          return this.post('auth/authenticate', JSON.stringify(json))
-        }
+      login: (json) => {
+        return this.post('auth/authenticate', JSON.stringify(json))
       }
+    }
+  }
+
+  public get users(): any {
+    return {
+      all: () => {
+        return this.get('users');
+      }
+    }
   }
 }
