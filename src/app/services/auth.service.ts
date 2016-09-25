@@ -2,30 +2,14 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 import {RequestService} from './request.service';
+import {CanActivate, Router} from '@angular/router';
 
 @Injectable()
-
 export class AuthService {
 
   constructor(private http: Http, private request: RequestService) {
     // this.loggedIn = !!localStorage.getItem('auth_token');
   }
-
-  // public login(email = 'admin@admin.lt', password = 'secret') {
-  //   console.log('i am at login');
-  //
-  //   this.http
-  //     .post('http://homestead.app/api/auth/authenticate',
-  //       JSON.stringify())
-  //     .map(res => res.json())
-  //     .catch(this.handleError)
-  //     .subscribe((data => {
-  //         // console.log(data);
-  //       }, err => {
-  //         // console.log(err)
-  //       }));
-  //   // localStorage.setItem('auth_token', 'loggedIn');
-  // }
 
   login(email = 'admin@admin.lt', password = 'secret'): Observable<boolean> {
     return this.request
@@ -61,5 +45,19 @@ export class AuthService {
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     // console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
+  }
+}
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+
+  constructor(private router: Router) { }
+
+  canActivate() {
+    if (localStorage.getItem('auth_token')) {
+      return true;
+    }
+    this.router.navigate(['/login']);
+    return false;
   }
 }

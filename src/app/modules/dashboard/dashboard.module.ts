@@ -9,6 +9,7 @@ import {
 } from "@angular/router";
 import {Observable} from "rxjs";
 import {CommonModule} from "@angular/common";
+import {AuthGuard} from '../../services/auth.service';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -17,26 +18,8 @@ import {CommonModule} from "@angular/common";
   ],
   imports: [FormsModule, RouterModule, CommonModule],
   exports: [],
-  // providers: [canActivateDashboard, UserToken, Permissions]
+  providers: [AuthGuard]
 })
 
 export class DashboardModule {
 }
-
-// class UserToken {}
-// class Permissions {
-//   canActivate(user: UserToken, id: string): boolean {
-//     return true;
-//   }
-// }
-//
-// @Injectable()
-// class canActivateDashboard implements CanActivate {
-//   constructor(private permissions: Permissions, private currentUser: UserToken) {}
-//   canActivate(
-//     route: ActivatedRouteSnapshot,
-//     state: RouterStateSnapshot
-//   ): Observable<boolean>|Promise<boolean>|boolean {
-//     return this.permissions.canActivate(this.currentUser, route.params.id);
-//   }
-// }

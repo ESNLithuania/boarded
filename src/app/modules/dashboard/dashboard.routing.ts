@@ -6,11 +6,12 @@ import {ModuleWithProviders, Injectable} from "@angular/core";
 import {DashboardComponent} from "./dashboard.component";
 import {LoginComponent} from "./login.component";
 import {ManageUsersComponent} from "./manage-users.component";
+import {AuthGuard} from '../../services/auth.service';
 export const dashboardRoutes: Route[] = [
   {
     path: 'clr',
     component: DashboardComponent,
-    // canActivate: [canActivateDashboard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

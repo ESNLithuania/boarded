@@ -7,14 +7,14 @@ import {dashboardRoutes} from "./modules/dashboard/dashboard.routing";
 declare var System;
 
 const appRoutes: Routes = [
-  // { path: '**', component: PageNotFoundComponent } //TODO(zygis)
   {
     path: '',
     pathMatch: 'full',
     component: HomeComponent
   },
   ...registrationRoutes,
-  ...dashboardRoutes
+  ...dashboardRoutes,
+  { path: '**', redirectTo: '' },
 ];
 
 export const appRoutingProviders: any[] = [];
