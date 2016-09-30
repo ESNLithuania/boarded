@@ -2,11 +2,12 @@ import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import {User} from "../../classes/user";
+import {environment} from "../../../environments/environment"
 
 @Injectable()
 export class RegistrationService {
 
-  baseUrl = 'http://localhost:3000/users';
+  baseUrl = environment.baseUrl+'/users';
 
   constructor(private http: Http) {
   }
