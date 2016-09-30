@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import {AuthService} from './services/auth.service';
 import {RequestService} from './services/request.service';
+import { ValidationService } from './services/validation.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {RequestService} from './services/request.service';
     RegistrationService,
     AUTH_PROVIDERS,
     AuthService,
-    RequestService
+    RequestService,
+    ValidationService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

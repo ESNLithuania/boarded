@@ -46,9 +46,10 @@
                      (click)="dp.toggle()">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <control-message [control]="basicForm.controls.userDateOfBirth"></control-message>
               </div>
-
+              <control-message [control]="basicForm.controls.userDateOfBirth"></control-message>
+            </div>
+            <div class="form-group">
               <label for="phone_number">Phone number</label>
               <input type="tel"
                      class="form-control"
@@ -100,6 +101,7 @@
                         [value]="section">{{section}}
                 </option>
               </select>
+              <control-message [control]="sectionForm.controls.userSection"></control-message>
             </div>
             <div class="form-group">
               <label for="position">Position</label>
@@ -112,6 +114,7 @@
                         [value]="position">{{position}}
                 </option>
               </select>
+              <control-message [control]="sectionForm.controls.userPosition"></control-message>
             </div>
           </fieldset>
           <button class="btn btn-primary pull-right"
@@ -145,6 +148,7 @@
                      name="street_name"
                      formControlName="userAddressStreetName"
               >
+              <control-message [control]="addressForm.controls.userAddressStreetName"></control-message>
             </div>
             <div class="form-group">
               <label for="building_number">Building number</label>
@@ -154,6 +158,7 @@
                      name="building_number"
                      formControlName="userAddressBuildingNumber"
               >
+              <control-message [control]="addressForm.controls.userAddressBuildingNumber"></control-message>
             </div>
             <div class="form-group">
               <label for="city">City</label>
@@ -163,10 +168,10 @@
                      name="city"
                      formControlName="userAddressCity"
               >
+              <control-message [control]="addressForm.controls.userAddressCity"></control-message>
             </div>
           </fieldset>
           <button type="submit"
-                  [disabled]="!areFormsValid()"
                   class="btn btn-primary pull-right">Finish registration
           </button>
           <button type="button"

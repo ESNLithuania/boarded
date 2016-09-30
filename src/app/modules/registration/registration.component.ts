@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {User, Address} from '../../classes/user';
-import {RegistrationService} from './registration.service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { User, Address } from '../../classes/user';
+import { RegistrationService } from './registration.service';
 import {
   FormGroup,
   FormBuilder,
@@ -8,7 +8,8 @@ import {
   AbstractControl,
   ValidatorFn
 } from '@angular/forms';
-import {NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'esn-registration',
@@ -24,12 +25,9 @@ export class RegistrationComponent {
   private addressForm: FormGroup;
 
   private tabs: Array<any>;
-  private selectedForm;
+  private selectedForm: {form: FormGroup, name: string};
 
   private submitted = false;
-
-  private formErrorMsg = 'Some of form fields are not valid';
-  private formErrorVisible = false;
 
   sections = [
     'VU',
@@ -42,7 +40,7 @@ export class RegistrationComponent {
     'Both'
   ];
 
-  constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig) {
+  constructor(fb: FormBuilder, private registrationService: RegistrationService, config: NgbDatepickerConfig, private validationService: ValidationService) {
     this.buildForms(fb);
     this.buildTabs();
     config.maxDate = {
@@ -62,14 +60,28 @@ export class RegistrationComponent {
   }
 
   public toggleSelected() {
+    if (this.checkIfSelectedFormInvalid()) {
+      this.markFormsInputAsTouched();
+    } else {
       this.selectedForm = this.tabs[this.tabs.indexOf(this.selectedForm) + 1];
+    }
+  }
+
+  private checkIfSelectedFormInvalid(): boolean {
+    return !this.selectedForm.form.valid;
+  }
+
+  private markFormsInputAsTouched() {
+    Object.keys(this.selectedForm.form.controls).map((controlName) => {
+      this.selectedForm.form.controls[controlName].markAsTouched();
+    })
   }
 
   private buildForms(fb: FormBuilder) {
     this.basicForm = fb.group({
       "userName": ["", Validators.required],
       "userSurname": ["", Validators.required],
-      "userDateOfBirth": ["", [Validators.required, dateIsPickedAndValid()]],
+      "userDateOfBirth": ["", [Validators.required]],
       "userPhoneNumber": ["", Validators.required],
       "userEmail": ["", Validators.required]
     });
@@ -96,7 +108,7 @@ export class RegistrationComponent {
       },
       {
         name: 'address-info',
-        form: this.sectionForm
+        form: this.addressForm
       }
     ];
 
@@ -108,22 +120,23 @@ export class RegistrationComponent {
   }
 
   private onSubmit() {
-    //We can skip validation since we validate using html5
-    //No we cannot because of safari -__-"
-    let basic = this.basicForm.value;
-    let section = this.sectionForm.value;
-    let address = this.addressForm.value;
-    let user: User = new User(basic.userName, basic.userSurname, section.userSection, section.userPosition, basic.userPhoneNumber, basic.userEmail, basic.userDateOfBirth, new Address(address.userAddressStreetName, address.userAddressBuildingNumber, address.userAddressCity));
+    console.log(this.checkIfSelectedFormInvalid(), this.selectedForm.form, this.selectedForm);
+    if (this.checkIfSelectedFormInvalid()) {
+      this.markFormsInputAsTouched();
+    } else {
+      //We can skip validation since we validate using html5
+      //No we cannot because of safari -__-"
+      let basic = this.basicForm.value;
+      let section = this.sectionForm.value;
+      let address = this.addressForm.value;
+      let user: User = new User(basic.userName, basic.userSurname, section.userSection, section.userPosition, basic.userPhoneNumber, basic.userEmail, basic.userDateOfBirth, new Address(address.userAddressStreetName, address.userAddressBuildingNumber, address.userAddressCity));
 
-    //show that form some section is invalid
-    this.registrationService.addUser(user)
-      .subscribe((res: User) => {
-        this.submitted = true;
-      });
-  }
-
-  private areFormsValid() {
-    return this.basicForm.valid && this.sectionForm.valid && this.addressForm.valid
+      //show that form some section is invalid
+      this.registrationService.addUser(user)
+        .subscribe((res: User) => {
+          this.submitted = true;
+        });
+    }
   }
 
 }
