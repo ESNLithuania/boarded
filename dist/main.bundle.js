@@ -49296,13 +49296,9 @@ var SharedModule = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return environment; });
-// The file for the current environment will overwrite this one during build.
-// Different environments can be found in ./environment.{dev|prod}.ts, and
-// you can create your own and use it with the --env flag.
-// The build system defaults to the dev environment.
 var environment = {
-    production: false,
-    baseUrl: 'http://95.85.46.201'
+    production: true,
+    baseUrl: ' http://95.85.46.201:3000'
 };
 
 
