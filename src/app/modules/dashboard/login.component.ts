@@ -1,6 +1,5 @@
-import {Component} from "@angular/core";
-import {User} from "../../classes/user";
-import {UserService} from "../../services/user.service";
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'esn-login',
   templateUrl: 'login.component.html',
@@ -11,9 +10,11 @@ export class LoginComponent {
   userPassword: string;
 
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {
+  }
 
   onSubmit() {
-    console.log(this.userEmail, this.userPassword);
+    this.authService
+      .login()
   }
 }

@@ -1,33 +1,42 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Http, Headers} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Http, Headers } from '@angular/http';
+import { AuthTokensService } from './auth-token.service';
 
 @Injectable()
 export class RequestService {
   private url = 'http://homestead.app/api/';
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authTokenService: AuthTokensService) {
   }
 
-  public post(url, json): Observable<any> {
+  public post(url, json, auth: Boolean = true): Observable<any> {
     let postHeaders = new Headers();
     postHeaders.append('Content-type', 'application/json');
+    if (auth) {
+      postHeaders = this.addAuthHeader(postHeaders)
+    }
 
     return this.http
       .post(this.url + url, json, {headers: postHeaders})
       .map(res => res.json());
   }
 
-  public get(url): Observable<any> {
+  public get(url, auth: Boolean = true): Observable<any> {
+    let getHeaders = new Headers();
+    if (auth) {
+      getHeaders = this.addAuthHeader(getHeaders)
+    }
+
     return this.http
-      .get(this.url + url)
+      .get(this.url + url, {headers: getHeaders})
       .map(res => res.json());
   }
 
   public get auth(): any {
     return {
       login: (json) => {
-        return this.post('auth/authenticate', JSON.stringify(json))
+        return this.post('auth/authenticate', JSON.stringify(json), false)
       }
     }
   }
@@ -38,5 +47,11 @@ export class RequestService {
         return this.get('users');
       }
     }
+  }
+
+  private addAuthHeader(headers: Headers): Headers {
+    let token = this.authTokenService.getCurrentUserToken().token;
+    headers.append('Authorization', `Bearer ${token}`);
+    return headers;
   }
 }

@@ -14,9 +14,10 @@ import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
 import {RequestService} from './services/request.service';
 import { ValidationService } from './services/validation.service';
+import { AuthTokensService } from './services/auth-token.service';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ValidationService } from './services/validation.service';
     RegistrationService,
     AUTH_PROVIDERS,
     AuthService,
+    AuthTokensService,
     RequestService,
     ValidationService
   ],

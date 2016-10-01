@@ -11,7 +11,7 @@ import {User, Address} from '../../classes/user';
 export class ManageUsersComponent {
   private users: Array<User> = [];
 
-  constructor(private userService: UserService, private authService: AuthService) {
+  constructor(private userService: UserService) {
   }
 
   loadUsers() {
@@ -24,11 +24,4 @@ export class ManageUsersComponent {
       })
   }
 
-  private login() {
-    this.authService
-      .login()
-      .subscribe(() => {
-        console.log('res');
-      })
-  }
 }

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs';
-import {RequestService} from './request.service';
-import {CanActivate, Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
+import { RequestService } from './request.service';
+import { CanActivate, Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +30,8 @@ export class AuthService {
           return false;
         }
       })
+      .subscribe(() => {
+      })
   }
 
   public logout() {
@@ -51,7 +53,8 @@ export class AuthService {
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   canActivate() {
     if (localStorage.getItem('auth_token')) {
