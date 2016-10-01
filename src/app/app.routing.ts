@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   },
   ...registrationRoutes,
   ...dashboardRoutes,
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 export const appRoutingProviders: any[] = [];
