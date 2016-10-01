@@ -30,8 +30,22 @@ export class RegistrationComponent {
   private submitted = false;
 
   sections = [
-    'VU',
-    'VDU'
+    'ESN ISLB',
+    'ESN ISM',
+    'ESN KK Kaunas',
+    'ESN KTU Kaunas',
+    'ESN KUK',
+    'ESN LEU',
+    'ESN LSMU',
+    'ESN LSU',
+    'ESN LT Alumni club',
+    'ESN MRU Vilnius',
+    'ESN SMK',
+    'ESN VDK',
+    'ESN VGTU',
+'ESN Vilnius University',
+    'ESN VMU Kaunas',
+    'ESN ŠU',
   ];
 
   positions = [
