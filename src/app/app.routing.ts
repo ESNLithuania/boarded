@@ -12,6 +12,10 @@ const appRoutes: Routes = [
     pathMatch: 'full',
     component: HomeComponent
   },
+  {
+    path: 'contacts',
+    component: HomeComponent
+  },
   ...registrationRoutes,
   ...dashboardRoutes,
   { path: '**', redirectTo: '' },
