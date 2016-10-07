@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'control-message',
   styleUrls: ['./control-message.component.css'],
-  templateUrl: './control-message.component.html'
+  templateUrl: './control-message.component.html',
 })
 export class ControlMessageComponent {
   @Input() control: FormControl;

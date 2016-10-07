@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'esn-login',
   templateUrl: 'login.component.html',
@@ -8,13 +9,32 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   userEmail: string;
   userPassword: string;
+  loginError: boolean = false;
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  onSubmit() {
+  private onSubmit() {
     this.authService
-      .login()
+      .login(this.userEmail, this.userPassword)
+      .subscribe((res: boolean) => {
+          if(res) {
+            this.router.navigate(['/clr']);
+          } else {
+            this.showLoginError();
+          }
+        },
+        (err: Error) => {
+          this.showLoginError(err.message);//todo: this goes away later
+        })
+  }
+
+  private showLoginError(msg?: string) {
+    this.loginError = true;
+  }
+
+  private hideLoginError() {
+    this.loginError = false;
   }
 }

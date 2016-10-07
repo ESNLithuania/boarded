@@ -14,7 +14,7 @@ import {AuthGuard} from '../../services/auth.service';
   declarations: [
     DashboardComponent,
     LoginComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
   ],
   imports: [FormsModule, RouterModule, CommonModule],
   exports: [],

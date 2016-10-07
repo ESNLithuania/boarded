@@ -1,6 +1,9 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit()" [hidden]="submitted">
   <fieldset>
     <legend>Login to boarded</legend>
+    <div *ngIf="loginError" class="error-message">
+      Login or password is invalid
+    </div>
     <div class="form-group">
       <label for="email">email</label>
       <input type="email"
@@ -9,6 +12,7 @@
              name="email"
              [(ngModel)]="userEmail"
              #name="ngModel"
+             (change)="hideLoginError()"
              required>
     </div>
     <div class="form-group">
@@ -19,6 +23,7 @@
              name="password"
              [(ngModel)]="userPassword"
              #name="ngModel"
+             (change)="hideLoginError()"
              required>
     </div>
   </fieldset>

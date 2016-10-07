@@ -11,7 +11,7 @@ export class AuthService {
     // this.loggedIn = !!localStorage.getItem('auth_token');
   }
 
-  login(email = 'admin@admin.lt', password = 'secret'): Observable<boolean> {
+  login(email, password): Observable<boolean> {
     return this.request
       .auth
       .login({
@@ -29,8 +29,6 @@ export class AuthService {
         } else {
           return false;
         }
-      })
-      .subscribe(() => {
       })
   }
 
