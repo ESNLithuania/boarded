@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 import { CanActivate, Router } from '@angular/router';
 
+interface AuthToken {
+  email: string,
+  token: string,
+  expires: number
+}
+
 @Injectable()
 export class AuthService {
 
@@ -12,18 +18,20 @@ export class AuthService {
   }
 
   login(email, password): Observable<boolean> {
-    return this.request
+    return this
+      .request
       .auth
       .login({
         email: email,
         password: password
       })
       .map((response) => {
-        let token = response && response.token;
-        if (token) {
-          localStorage.setItem('auth_token', JSON.stringify({
+        if (response && response.token && response.expires) {
+          localStorage.setItem('auth_token', JSON.stringify(<AuthToken>{
             email: email,
-            token: token
+            token: response.token,
+            expires: new Date(Date.now() + response.expires * 60000).getTime()
+                     / 1000
           }));
           return true;
         } else {
@@ -41,8 +49,12 @@ export class AuthService {
   }
 
   private handleError(error: any) {
-    let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    let errMsg = (error.message)
+      ? error.message
+      :
+                 error.status
+                   ? `${error.status} - ${error.statusText}`
+                   : 'Server error';
     // console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
@@ -55,9 +67,12 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate() {
-    if (localStorage.getItem('auth_token')) {
-      return true;
+    const token = localStorage.getItem('auth_token');
+    if(token) {
+      const authToken: AuthToken = JSON.parse(token);
+      return authToken.expires > (Date.now() / 1000);
     }
+
     this.router.navigate(['/login']);
     return false;
   }
