@@ -44,7 +44,7 @@ export class AuthService {
     // localStorage.removeItem('auth_token');
   }
 
-  public loggedIn() {
+    public loggedIn() {
     // return tokenNotExpired();
   }
 
@@ -68,12 +68,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     const token = localStorage.getItem('auth_token');
+    if(!this.isValid(token)) {
+      this.router.navigate(['/login']);
+    } else {
+      return true;
+    }
+  }
+
+  private isValid(token): boolean {
     if(token) {
       const authToken: AuthToken = JSON.parse(token);
       return authToken.expires > (Date.now() / 1000);
+    } else {
+      return false;
     }
-
-    this.router.navigate(['/login']);
-    return false;
   }
 }
