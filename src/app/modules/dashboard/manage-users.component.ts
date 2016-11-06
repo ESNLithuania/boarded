@@ -1,3 +1,4 @@
+/** Some code taken from http://valor-software.com/ng2-table/, under MIT license **/
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User, Address } from '../../classes/user';
@@ -156,8 +157,5 @@ export class ManageUsersComponent implements OnInit {
     this.length = sortedData.length;
   }
 
-  public onCellClick(data: any): any {
-    console.log(data);
-  }
 
 }
