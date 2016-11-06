@@ -187,6 +187,14 @@ export class ManageUsersComponent implements OnInit {
     return row[column.name];
   }
 
+  public columnSortWay(column: Column): 'asc' | 'desc' | '' {
+    if(column.sort || column.sort !== '') {
+      return column.sort;
+    } else {
+      return '';
+    }
+  }
+
   public sortByColumn(columnToSort: Column) {
     const sorting: Array<Column> = Object.assign({}, this.config.sorting).columns;
 
@@ -204,6 +212,7 @@ export class ManageUsersComponent implements OnInit {
     const config = Object.assign({}, this.config, {
       sorting: {columns: sorted}
     });
+    this.page = 1;
     this.onChangeTable(config);
   }
 

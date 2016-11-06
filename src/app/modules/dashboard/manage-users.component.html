@@ -47,6 +47,8 @@ SOFTWARE.
   <tr>
     <th *ngFor="let column of columns" (click)="sortByColumn(column)">
       {{column.title}}
+      <i *ngIf="columnSortWay(column) !== ''" class="fa fa-sort-alpha-{{columnSortWay(column)}}" aria-hidden="true">
+      </i>
     </th>
   </tr>
   </thead>
