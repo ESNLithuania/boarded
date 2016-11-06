@@ -30,7 +30,7 @@ import { User, Address } from '../../classes/user';
 interface Column {
   title: string,
   name: string,
-  sort? : 'desc' | 'asc' | ''
+  sort?: 'desc' | 'asc' | ''
 }
 
 @Component({
@@ -101,7 +101,7 @@ export class ManageUsersComponent implements OnInit {
 
     const columnWithSort: Column = columns.find((column: Column) => {
       /* Checking if sort prop exists and column needs to be sorted */
-      if(column.hasOwnProperty('sort') && column.sort !== '') {
+      if (column.hasOwnProperty('sort') && column.sort !== '') {
         return true;
       }
     });
@@ -158,9 +158,11 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public onChangeTable(config: any, pageNumber?: number): any {
-    const page : {itemsPerPage: number, page: number} = {
+    const page: {itemsPerPage: number, page: number} = {
       itemsPerPage: this.itemsPerPage,
-      page: pageNumber ? pageNumber : 1
+      page: pageNumber
+        ? pageNumber
+        : 1
     };
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
@@ -179,8 +181,30 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public getData(row: any, column: Column): string {
-    if(!row) { return '' }
+    if (!row) {
+      return ''
+    }
     return row[column.name];
+  }
+
+  public sortByColumn(columnToSort: Column) {
+    const sorting: Array<Column> = Object.assign({}, this.config.sorting).columns;
+
+    const sorted = sorting.map((column: Column) => {
+      if (columnToSort.name === column.name) {
+        const newSort = column.sort === 'asc'
+          ? 'desc'
+          : 'asc';
+        return Object.assign(column, {sort: newSort});
+      } else {
+        return Object.assign(column, {sort: ''});
+      }
+    });
+
+    const config = Object.assign({}, this.config, {
+      sorting: {columns: sorted}
+    });
+    this.onChangeTable(config);
   }
 
 
