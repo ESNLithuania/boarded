@@ -29,7 +29,8 @@ import { User, Address } from '../../classes/user';
 
 interface Column {
   title: string,
-  name: string
+  name: string,
+  sort? : 'desc' | 'asc' | ''
 }
 
 @Component({
@@ -43,6 +44,7 @@ export class ManageUsersComponent implements OnInit {
     {
       title: 'Name',
       name: 'name',
+      sort: 'desc'
     },
     {
       title: 'Surname',
@@ -95,30 +97,22 @@ export class ManageUsersComponent implements OnInit {
     if (!config.sorting) {
       return data;
     }
+    const columns = this.config.sorting.columns || [];
 
-    let columns = this.config.sorting.columns || [];
-    let columnName: string = void 0;
-    let sort: string = void 0;
-
-    for (let i = 0; i < columns.length; i++) {
-      if (columns[i].sort !== '' && columns[i].sort !== false) {
-        columnName = columns[i].name;
-        sort = columns[i].sort;
+    const columnWithSort: Column = columns.find((column: Column) => {
+      /* Checking if sort prop exists and column needs to be sorted */
+      if(column.hasOwnProperty('sort') && column.sort !== '') {
+        return true;
       }
-    }
+    });
 
-    if (!columnName) {
-      return data;
-    }
-
-    // simple sorting
     return data.sort((previous: any, current: any) => {
-      if (previous[columnName] > current[columnName]) {
-        return sort === 'desc'
+      if (previous[columnWithSort.name] > current[columnWithSort.name]) {
+        return columnWithSort.sort === 'desc'
           ? -1
           : 1;
-      } else if (previous[columnName] < current[columnName]) {
-        return sort === 'asc'
+      } else if (previous[columnWithSort.name] < current[columnWithSort.name]) {
+        return columnWithSort.sort === 'asc'
           ? -1
           : 1;
       }
