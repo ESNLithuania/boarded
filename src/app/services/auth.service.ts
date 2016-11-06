@@ -28,10 +28,11 @@ export class AuthService {
       .map((response) => {
         if (response && response.token && response.expires) {
           localStorage.setItem('auth_token', JSON.stringify(<AuthToken>{
-            email: email,
+            email: window.btoa(email),
             token: response.token,
             expires: new Date(Date.now() + response.expires * 60000).getTime()
-                     / 1000
+                     / 1000,
+            role: window.btoa(response.role)
           }));
           return true;
         } else {
