@@ -2,6 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User, Address } from '../../classes/user';
+
+interface Column {
+  title: string,
+  name: string
+}
+
 @Component({
   selector: 'esn-dashboard-manage-users',
   templateUrl: 'manage-users.component.html',
@@ -9,7 +15,7 @@ import { User, Address } from '../../classes/user';
 })
 export class ManageUsersComponent implements OnInit {
   public rows: Array<any> = [];
-  public columns: Array<any> = [
+  public columns: Array<Column> = [
     {
       title: 'Name',
       name: 'name',
@@ -32,12 +38,10 @@ export class ManageUsersComponent implements OnInit {
     paging: true,
     sorting: {columns: this.columns},
     filtering: {filterString: ''},
-    className: ['table-striped', 'table-bordered']
   };
   private data: Array<User> = [];
 
   constructor(private userService: UserService) {
-    this.length = this.data.length;
   }
 
   ngOnInit() {
@@ -51,7 +55,6 @@ export class ManageUsersComponent implements OnInit {
           this.data = data.map((user) => {
             return new User(user.name, user.surname, user.section_id, user.position_id, user.phone_number, user.email, user.date_of_birth, new Address(user.street_address, user.street_building, user.city));
           });
-          this.length = this.data.length;
           this.onChangeTable(this.config);
         })
   }
@@ -155,6 +158,11 @@ export class ManageUsersComponent implements OnInit {
       ? this.changePage(page, sortedData)
       : sortedData;
     this.length = sortedData.length;
+  }
+
+  public getData(row: any, column: Column): string {
+    if(!row) { return '' }
+    return row[column.name];
   }
 
 

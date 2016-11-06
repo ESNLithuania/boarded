@@ -6,7 +6,6 @@ import { ManageUsersComponent } from './manage-users.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../../services/auth.service';
-import { Ng2TableModule } from 'ng2-table';
 import {
   NgbPaginationModule,
   NgbPaginationConfig
@@ -21,7 +20,6 @@ import {
     FormsModule,
     RouterModule,
     CommonModule,
-    Ng2TableModule,
     NgbPaginationModule
   ],
   exports: [],
