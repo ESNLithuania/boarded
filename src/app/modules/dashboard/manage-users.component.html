@@ -1,9 +1,27 @@
 <p>Users!</p>
+<div class="row">
+  <div class="col-md-4">
+    <input *ngIf="config.filtering" placeholder="Filter all columns"
+           [ngTableFiltering]="config.filtering"
+           class="form-control"
+           (tableChanged)="onChangeTable(config)"/>
+  </div>
+</div>
+<br>
+<ng-table [config]="config"
+          (tableChanged)="onChangeTable(config)"
+          (cellClicked)="onCellClick($event)"
+          [rows]="rows" [columns]="columns">
+</ng-table>
+<ngb-pagination *ngIf="config.paging"
+                class="pagination-sm"
+                [(page)]="page"
+                [collectionSize]="length"
+                [pageSize]="itemsPerPage"
+                [maxSize]="maxSize"
+                [boundaryLinks]="true"
+                [rotate]="false"
+                (pageChange)="onChangeTable(config, $event)"
+></ngb-pagination>
 
-<ul>
-  <li class="text" *ngFor="let user of users">
-    {{user.email}}
-  </li>
-</ul>
-
-<button (click)="loadUsers()">Load users!</button>
+<pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{length / itemsPerPage}}</pre>

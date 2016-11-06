@@ -13,7 +13,6 @@ import {HomeComponent} from "./components/home.component";
 import {RegistrationModule} from "./modules/registration/registration.module";
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import { environment } from '../environments/environment';
-import {AUTH_PROVIDERS} from 'angular2-jwt';
 import { AuthService } from './services/auth.service';
 import {RequestService} from './services/request.service';
 import { ValidationService } from './services/validation.service';
@@ -29,7 +28,6 @@ import { AuthTokensService } from './services/auth-token.service';
     BrowserModule,
     CommonModule,
     FormsModule,
-    NgbModule,
     SharedModule,
     HttpModule,
     RegistrationModule,
@@ -40,7 +38,6 @@ import { AuthTokensService } from './services/auth-token.service';
     appRoutingProviders,
     UserService,
     RegistrationService,
-    AUTH_PROVIDERS,
     AuthService,
     AuthTokensService,
     RequestService,
