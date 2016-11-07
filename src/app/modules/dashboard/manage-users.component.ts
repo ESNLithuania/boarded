@@ -23,7 +23,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User, Address } from '../../classes/user';
 
@@ -66,15 +66,23 @@ export class ManageUsersComponent implements OnInit {
     filtering: {filterString: ''},
   };
   private data: Array<User> = [];
+  private editableRow : -1 | number = -1;
 
   constructor(private userService: UserService) {
   }
 
-  ngOnInit() {
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement: HTMLElement) {
+    if(targetElement.tagName != 'INPUT' && targetElement.tagName != 'I') {
+      this.editableRow = -1;
+    }
+  }
+
+  public ngOnInit() {
     this.loadUsers();
   }
 
-  loadUsers() {
+  public loadUsers() {
     this.userService
         .getUsers()
         .subscribe((data) => {
@@ -216,5 +224,8 @@ export class ManageUsersComponent implements OnInit {
     this.onChangeTable(config);
   }
 
+  public editRow(row: number) {
+    this.editableRow = row;
+  }
 
 }

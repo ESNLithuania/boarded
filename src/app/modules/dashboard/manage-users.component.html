@@ -36,27 +36,36 @@ SOFTWARE.
 </div>
 <br>
 
-<!--<ng-table [config]="config"-->
-<!--(tableChanged)="onChangeTable(config)"-->
-<!--[rows]="rows"-->
-<!--[columns]="columns">-->
-<!--</ng-table>-->
-
 <table class="table table-striped table-hover">
   <thead>
   <tr>
-    <th *ngFor="let column of columns" (click)="sortByColumn(column)">
+    <th *ngFor="let column of columns"
+        (click)="sortByColumn(column)">
       {{column.title}}
-      <i *ngIf="columnSortWay(column) !== ''" class="fa fa-sort-alpha-{{columnSortWay(column)}}" aria-hidden="true">
+      <i *ngIf="columnSortWay(column) !== ''"
+         class="fa fa-sort-alpha-{{columnSortWay(column)}}"
+         aria-hidden="true">
       </i>
     </th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let row of rows"
+  <tr *ngFor="let row of rows; let i=index"
   >
     <td *ngFor="let column of columns">
-      {{getData(row, column)}}
+      <div *ngIf="editableRow === i">
+        <input [ngModel]="getData(row, column)">
+      </div>
+      <div *ngIf="editableRow !== i">
+        {{getData(row, column)}}
+      </div>
+    </td>
+    <td>
+      <i class="fa fa-pencil-square row-icon"
+         (click)="editRow(i)"
+      >
+      </i>
     </td>
   </tbody>
 </table>
