@@ -23,7 +23,10 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
-import { Component, OnInit, HostListener } from '@angular/core';
+import {
+  Component, OnInit, HostListener, ViewChild,
+  ElementRef
+} from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User, Address } from '../../classes/user';
 
@@ -66,7 +69,9 @@ export class ManageUsersComponent implements OnInit {
     filtering: {filterString: ''},
   };
   private data: Array<User> = [];
-  private editableRow : -1 | number = -1;
+
+  private editableRowNumber : -1 | number = -1;
+  private editableRow: Array<any> = [];
 
   constructor(private userService: UserService) {
   }
@@ -74,8 +79,10 @@ export class ManageUsersComponent implements OnInit {
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement: HTMLElement) {
     if(targetElement.tagName != 'INPUT' && targetElement.tagName != 'I') {
-      this.editableRow = -1;
+      this.updateUser();
+      this.editableRowNumber = -1;
     }
+
   }
 
   public ngOnInit() {
@@ -224,8 +231,19 @@ export class ManageUsersComponent implements OnInit {
     this.onChangeTable(config);
   }
 
-  public editRow(row: number) {
-    this.editableRow = row;
+  public enableEditing(row: number) {
+    this.editableRowNumber = row;
+  }
+
+  public updateEditableRowData(data: any, column: Column) {
+    this.editableRow[column.name] = data;
+  }
+
+  private updateUser() {
+    const originalUser = this.rows[this.editableRowNumber];
+    const updatedUser = <User>Object.assign(originalUser, this.editableRow);
+    // this.userService
+        // .updateUser(updatedUser)
   }
 
 }

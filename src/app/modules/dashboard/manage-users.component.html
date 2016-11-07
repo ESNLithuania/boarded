@@ -54,16 +54,16 @@ SOFTWARE.
   <tr *ngFor="let row of rows; let i=index"
   >
     <td *ngFor="let column of columns">
-      <div *ngIf="editableRow === i">
-        <input [ngModel]="getData(row, column)">
+      <div *ngIf="editableRowNumber === i">
+        <input #input [ngModel]="getData(row, column)" (keydown)="updateEditableRowData(input.value, column)">
       </div>
-      <div *ngIf="editableRow !== i">
+      <div *ngIf="editableRowNumber !== i">
         {{getData(row, column)}}
       </div>
     </td>
     <td>
       <i class="fa fa-pencil-square row-icon"
-         (click)="editRow(i)"
+         (click)="enableEditing(i)"
       >
       </i>
     </td>
