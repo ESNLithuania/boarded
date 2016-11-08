@@ -78,7 +78,12 @@ export class ManageUsersComponent implements OnInit {
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement: HTMLElement) {
-    if(targetElement.tagName != 'INPUT' && targetElement.tagName != 'I') {
+    const tagsNotToInteractWith = ['INPUT', 'I', 'TH'];
+    const interact = tagsNotToInteractWith.reduce((result, item) => {
+      return result && targetElement.tagName != item;
+    }, true);
+
+    if(interact) {
       this.updateUser();
       this.editableRowNumber = -1;
     }
@@ -234,16 +239,17 @@ export class ManageUsersComponent implements OnInit {
   public enableEditing(row: number) {
     this.editableRowNumber = row;
   }
-
   public updateEditableRowData(data: any, column: Column) {
     this.editableRow[column.name] = data;
   }
 
   private updateUser() {
-    const originalUser = this.rows[this.editableRowNumber];
-    const updatedUser = <User>Object.assign(originalUser, this.editableRow);
-    // this.userService
-        // .updateUser(updatedUser)
+    if(this.editableRowNumber !== -1) {
+      const originalUser = this.rows[this.editableRowNumber];
+      const updatedUser = <User>Object.assign(originalUser, this.editableRow);
+      // this.userService
+      // .updateUser(updatedUser)
+    }
   }
 
 }
