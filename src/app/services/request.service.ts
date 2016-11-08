@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http, Headers } from '@angular/http';
 import { AuthTokensService } from './auth-token.service';
+import { User } from '../classes/user';
 
 @Injectable()
 export class RequestService {
@@ -20,6 +21,18 @@ export class RequestService {
     return this.http
       .post(this.url + url, json, {headers: postHeaders})
       .map(res => res.json());
+  }
+
+  public put(url, json, auth: Boolean = true): Observable<any> {
+    let postHeaders = new Headers();
+    postHeaders.append('Content-type', 'application/json');
+    if (auth) {
+      postHeaders = this.addAuthHeader(postHeaders)
+    }
+
+    return this.http
+               .put(this.url + url, json, {headers: postHeaders})
+               .map(res => res.json());
   }
 
   public get(url, auth: Boolean = true): Observable<any> {
@@ -45,6 +58,9 @@ export class RequestService {
     return {
       all: () => {
         return this.get('users');
+      },
+      update: (user: User) => {
+        return this.put(`users/${user.id}`, JSON.stringify(user));
       }
     }
   }

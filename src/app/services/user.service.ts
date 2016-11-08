@@ -16,4 +16,11 @@ export class UserService {
       .all();
   }
 
+  public updateUser(user: User): Observable<any> {
+    return this.request
+      .users
+      .update(user)
+      .subscribe(() => {})
+  }
+
 }

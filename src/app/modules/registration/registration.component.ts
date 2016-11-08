@@ -143,7 +143,7 @@ export class RegistrationComponent {
       let basic = this.basicForm.value;
       let section = this.sectionForm.value;
       let address = this.addressForm.value;
-      let user: User = new User(basic.userName, basic.userSurname, section.userSection, section.userPosition, basic.userPhoneNumber, basic.userEmail, basic.userDateOfBirth, new Address(address.userAddressStreetName, address.userAddressBuildingNumber, address.userAddressCity));
+      let user: User = new User('', basic.userName, basic.userSurname, section.userSection, section.userPosition, basic.userPhoneNumber, basic.userEmail, basic.userDateOfBirth, new Address(address.userAddressStreetName, address.userAddressBuildingNumber, address.userAddressCity));
 
       //show that form some section is invalid
       this.registrationService.addUser(user)

@@ -23,10 +23,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
-import {
-  Component, OnInit, HostListener, ViewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User, Address } from '../../classes/user';
 
@@ -70,7 +67,7 @@ export class ManageUsersComponent implements OnInit {
   };
   private data: Array<User> = [];
 
-  private editableRowNumber : -1 | number = -1;
+  private editableRowNumber: -1 | number = -1;
   private editableRow: Array<any> = [];
 
   constructor(private userService: UserService) {
@@ -83,7 +80,7 @@ export class ManageUsersComponent implements OnInit {
       return result && targetElement.tagName != item;
     }, true);
 
-    if(interact) {
+    if (interact) {
       this.updateUser();
       this.editableRowNumber = -1;
     }
@@ -99,7 +96,7 @@ export class ManageUsersComponent implements OnInit {
         .getUsers()
         .subscribe((data) => {
           this.data = data.map((user) => {
-            return new User(user.name, user.surname, user.section_id, user.position_id, user.phone_number, user.email, user.date_of_birth, new Address(user.street_address, user.street_building, user.city));
+            return new User(user.id, user.name, user.surname, user.section_id, user.position_id, user.phone_number, user.email, user.date_of_birth, new Address(user.street_address, user.street_building, user.city));
           });
           this.onChangeTable(this.config);
         })
@@ -208,7 +205,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public columnSortWay(column: Column): 'asc' | 'desc' | '' {
-    if(column.sort || column.sort !== '') {
+    if (column.sort || column.sort !== '') {
       return column.sort;
     } else {
       return '';
@@ -238,17 +235,19 @@ export class ManageUsersComponent implements OnInit {
 
   public enableEditing(row: number) {
     this.editableRowNumber = row;
+    this.editableRow = this.rows[this.editableRowNumber];
   }
+
   public updateEditableRowData(data: any, column: Column) {
     this.editableRow[column.name] = data;
   }
 
   private updateUser() {
-    if(this.editableRowNumber !== -1) {
+    if (this.editableRowNumber !== -1) {
       const originalUser = this.rows[this.editableRowNumber];
       const updatedUser = <User>Object.assign(originalUser, this.editableRow);
-      // this.userService
-      // .updateUser(updatedUser)
+      this.userService
+          .updateUser(updatedUser)
     }
   }
 
