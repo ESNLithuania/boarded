@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import {RequestService} from './services/request.service';
 import { ValidationService } from './services/validation.service';
-import { AuthTokensService } from './services/auth-token.service';
+import { AuthTokenService } from './services/auth-token.service';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { AuthTokensService } from './services/auth-token.service';
     UserService,
     RegistrationService,
     AuthService,
-    AuthTokensService,
+    AuthTokenService,
     RequestService,
     ValidationService
   ],

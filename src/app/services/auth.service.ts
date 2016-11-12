@@ -3,21 +3,18 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 import { CanActivate, Router } from '@angular/router';
-
-interface AuthToken {
-  email: string,
-  token: string,
-  expires: number
-}
+import { User } from '../classes/user';
+import { AuthTokenService, AuthToken } from './auth-token.service';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http, private request: RequestService) {
-    // this.loggedIn = !!localStorage.getItem('auth_token');
+  constructor(private http: Http,
+              private request: RequestService,
+              private authTokenService: AuthTokenService) {
   }
 
-  login(email, password): Observable<boolean> {
+  login(email, password): Observable < boolean > {
     return this
       .request
       .auth
@@ -41,15 +38,40 @@ export class AuthService {
       })
   }
 
-  public logout() {
-    // localStorage.removeItem('auth_token');
+  public role() : string {
+    if(this.authTokenService.tokenIsValid()) {
+      return this.authTokenService.currentRole();
+    }
   }
 
-    public loggedIn() {
+  public loggedInUser(): Promise<User> {
+    if (this.authTokenService.tokenIsValid()) {
+      return this.request
+        .auth
+        .authenticatedUser()
+        .map((user) => {
+          if (user) {
+            return user.user;
+          }
+        })
+        .toPromise()
+    } else {
+      return new Promise((res, rej) => {
+        res(new User())
+      });
+    }
+  }
+
+  public logout() {
+    localStorage.removeItem('auth_token');
+  }
+
+  public loggedIn() {
     // return tokenNotExpired();
   }
 
-  private handleError(error: any) {
+  private
+  handleError(error: any) {
     let errMsg = (error.message)
       ? error.message
       :
@@ -64,24 +86,16 @@ export class AuthService {
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authTokenService: AuthTokenService) {
   }
 
   canActivate() {
-    const token = localStorage.getItem('auth_token');
-    if(!this.isValid(token)) {
+    if (!this.authTokenService.tokenIsValid()) {
       this.router.navigate(['/login']);
     } else {
       return true;
     }
   }
 
-  private isValid(token): boolean {
-    if(token) {
-      const authToken: AuthToken = JSON.parse(token);
-      return authToken.expires > (Date.now() / 1000);
-    } else {
-      return false;
-    }
-  }
+
 }

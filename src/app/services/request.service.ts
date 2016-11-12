@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http, Headers } from '@angular/http';
-import { AuthTokensService } from './auth-token.service';
+import { AuthTokenService } from './auth-token.service';
 import { User } from '../classes/user';
 
 @Injectable()
 export class RequestService {
   private url = 'http://homestead.app/api/';
 
-  constructor(private http: Http, private authTokenService: AuthTokensService) {
+  constructor(private http: Http, private authTokenService: AuthTokenService) {
   }
 
   public post(url, json, auth: Boolean = true): Observable<any> {
@@ -49,7 +49,10 @@ export class RequestService {
   public get auth(): any {
     return {
       login: (json) => {
-        return this.post('auth/authenticate', JSON.stringify(json), false)
+        return this.post('auth/authenticate', JSON.stringify(json), false);
+      },
+      authenticatedUser: () => {
+        return this.get('auth/authenticatedUser');
       }
     }
   }
@@ -66,7 +69,7 @@ export class RequestService {
   }
 
   private addAuthHeader(headers: Headers): Headers {
-    let token = this.authTokenService.getCurrentUserToken().token;
+    let token = this.authTokenService.currentUserToken().token;
     headers.append('Authorization', `Bearer ${token}`);
     return headers;
   }
