@@ -53,6 +53,20 @@ export class RequestService {
       },
       authenticatedUser: () => {
         return this.get('auth/authenticatedUser');
+      },
+      roles: () => {
+        return Observable.from([
+          [
+            {
+              id: 11,
+              name: 'administrator'
+            },
+            {
+              id: 12,
+              name: 'section_responsible'
+            }
+          ]
+        ]);
       }
     }
   }

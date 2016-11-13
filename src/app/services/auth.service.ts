@@ -14,7 +14,7 @@ export class AuthService {
               private authTokenService: AuthTokenService) {
   }
 
-  login(email, password): Observable < boolean > {
+  public login(email, password): Observable < boolean > {
     return this
       .request
       .auth
@@ -38,23 +38,30 @@ export class AuthService {
       })
   }
 
-  public role() : string {
-    if(this.authTokenService.tokenIsValid()) {
+  public role(): string {
+    if (this.authTokenService.tokenIsValid()) {
       return this.authTokenService.currentRole();
     }
+  }
+
+  public roles(): Promise<any> {
+    return this.request
+               .auth.roles()
+               .map(_ => _)
+               .toPromise();
   }
 
   public loggedInUser(): Promise<User> {
     if (this.authTokenService.tokenIsValid()) {
       return this.request
-        .auth
-        .authenticatedUser()
-        .map((user) => {
-          if (user) {
-            return user.user;
-          }
-        })
-        .toPromise()
+                 .auth
+                 .authenticatedUser()
+                 .map((user) => {
+                   if (user) {
+                     return user.user;
+                   }
+                 })
+                 .toPromise()
     } else {
       return new Promise((res, rej) => {
         res(new User())
@@ -66,12 +73,7 @@ export class AuthService {
     localStorage.removeItem('auth_token');
   }
 
-  public loggedIn() {
-    // return tokenNotExpired();
-  }
-
-  private
-  handleError(error: any) {
+  private handleError(error: any) {
     let errMsg = (error.message)
       ? error.message
       :

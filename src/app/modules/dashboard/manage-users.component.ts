@@ -63,6 +63,11 @@ export class ManageUsersComponent implements OnInit {
       name: 'section',
       type: 'select'
     },
+    {
+      title: 'Role',
+      name: 'role',
+      type: 'select'
+    }
   ];
   public page: number = 1;
   public itemsPerPage: number = 10;
@@ -122,9 +127,24 @@ export class ManageUsersComponent implements OnInit {
                   name: getSectionName(user.section_id)
                 },
                 phoneNumber: user.phone_number,
-                email: user.email
+                email: user.email,
+                role: getRole(user),
               }
             });
+
+            function getRole(user) {
+              const role = user.roles.length > 0
+                ? {
+                id: user.roles[0].id,
+                name: user.roles[0].name
+              }
+                : {
+                id: 1,
+                name: 'None'
+              };
+
+              return role;
+            }
 
             function getSectionName(id) {
               return sections.find((section) => {
@@ -178,11 +198,11 @@ export class ManageUsersComponent implements OnInit {
     const filteredData = data.filter((user: User) => {
       //return true if some column matches filterString
       return this.columns.find((column: Column) => {
-        switch(column.type) {
+        switch (column.type) {
           case 'text':
             return user[column.name].includes(filterString);
           case 'select':
-            const columnData : SelectValue = user[column.name];
+            const columnData: SelectValue = user[column.name];
             return columnData.name.includes(filterString);
         }
       });
