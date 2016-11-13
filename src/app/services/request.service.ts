@@ -70,12 +70,68 @@ export class RequestService {
           [
             {
               id: 1,
-              name: 'ESN_VU',
+              name: 'ESN ISLB'
             },
             {
               id: 2,
-              name: 'ESN_KTU'
-            }
+              name: 'ESN VDK'
+            },
+            {
+              id: 3,
+              name: 'ESN SMK'
+            },
+            {
+              id: 4,
+              name: 'ESN MRU Vilnius'
+            },
+            {
+              id: 5,
+              name: 'ESN LT Alumni club'
+            },
+            {
+              id: 6,
+              name: 'ESN LSU'
+            },
+            {
+              id: 7,
+              name: 'ESN LSMU'
+            },
+            {
+              id: 8,
+              name: 'ESN LEU'
+            },
+            {
+              id: 9,
+              name: 'ESN KUK'
+            },
+            {
+              id: 10,
+              name: 'ESN KTU Kaunas'
+            },
+            {
+              id: 11,
+              name: 'ESN KK Kaunas'
+            },
+            {
+              id: 12,
+              name: 'ESN VGTU'
+            },
+            {
+              id: 13,
+              name: 'ESN Vilnius University'
+            },
+            {
+              id: 14,
+              name: 'ESN VMU Kaunas'
+            },
+            {
+              id: 15,
+              name: 'ESN ŠU'
+            },
+            {
+              id: 16,
+              name: 'ESN ISM'
+            },
           ]
         ])
       }
