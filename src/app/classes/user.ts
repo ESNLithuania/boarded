@@ -1,9 +1,10 @@
+import { SelectValue } from '../modules/dashboard/manage-users.component';
 export class User {
 
   constructor(public id?: string,
               public name?: string,
               public surname?: string,
-              public section?: string,
+              public section?: SelectValue,
               public position?: string,
               public phoneNumber?: string,
               public email?: string,

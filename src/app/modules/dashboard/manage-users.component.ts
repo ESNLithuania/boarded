@@ -25,13 +25,18 @@
  */
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { User, Address } from '../../classes/user';
+import { User } from '../../classes/user';
 
 interface Column {
   title: string,
   name: string,
   type: 'text' | 'select',
   sort?: 'desc' | 'asc' | '',
+}
+
+export interface SelectValue {
+  id: number,
+  name: string
 }
 
 @Component({
@@ -102,10 +107,28 @@ export class ManageUsersComponent implements OnInit {
     this.userService
         .getUsers()
         .subscribe((data) => {
-          this.data = data.map((user) => {
-            return new User(user.id, user.name, user.surname, user.section_id, user.position_id, user.phone_number, user.email, user.date_of_birth, new Address(user.street_address, user.street_building, user.city));
+          const sections : Promise<any> = this.userService.getSections().toPromise();
+          sections.then((sections) => {
+
+            this.data = data.map((user) => {
+              return <User>{
+                id: user.id,
+                name: user.name,
+                surname: user.surname,
+                position: user.position_id,
+                section: {id: user.section_id, name: getSectionName(user.section_id) },
+                phoneNumber: user.phone_number,
+                email: user.email
+              }
+            });
+
+            function getSectionName(id) {
+              return sections.find((section) => {
+                return section.id == id;
+              }).name;
+            }
+            this.onChangeTable(this.config);
           });
-          this.onChangeTable(this.config);
         })
   }
 
@@ -246,7 +269,11 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public updateEditableRowData(data: any, column: Column) {
-    this.editableRow[column.name] = data;
+    if(column.type === 'select') {
+      this.editableRow[column.name] = this.selectValueById(data);
+    } else {
+      this.editableRow[column.name] = data;
+    }
   }
 
   private updateUser() {
@@ -261,21 +288,15 @@ export class ManageUsersComponent implements OnInit {
   private loadSections() {
     this.userService
       .getSections()
-      .subscribe((data: Array<{id: number, name: string}>) => {
+      .subscribe((data: Array<SelectValue>) => {
         this.sections = data;
       })
   }
 
-  public getSelectValue(row, column: Column): string {
-    const id = this.getData(row, column);
-
-    const section = this.sections.find(_=> _.id == id);
-
-    if(section) {
-      return section.name
-    } else {
-      return id;
-    }
+  private selectValueById(id: number): SelectValue {
+    return this.sections.find((section) => {
+      return section.id == id;
+    })
   }
 
 }

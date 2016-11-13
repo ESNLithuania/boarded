@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { RequestService } from './request.service';
 import { User } from '../classes/user';
 import { Observable } from 'rxjs';
+import { SelectValue } from '../modules/dashboard/manage-users.component';
 
 @Injectable()
 
@@ -23,7 +24,7 @@ export class UserService {
                .subscribe(() => {})
   }
 
-  public getSections(): Observable<Array<{id: number, name: string}>> {
+  public getSections(): Observable<Array<SelectValue>> {
     return this.request
                .users
                .sections()
