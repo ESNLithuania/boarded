@@ -31,7 +31,7 @@ SOFTWARE.
            placeholder="Filter all columns"
            [(ngModel)]="config.filtering.filterString"
            class="form-control"
-           (keydown)="onChangeTable(config)"/>
+           (keyup)="onChangeTable(config)"/>
   </div>
 </div>
 <br>

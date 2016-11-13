@@ -107,7 +107,8 @@ export class ManageUsersComponent implements OnInit {
     this.userService
         .getUsers()
         .subscribe((data) => {
-          const sections : Promise<any> = this.userService.getSections().toPromise();
+          const sections: Promise<any> = this.userService.getSections()
+                                             .toPromise();
           sections.then((sections) => {
 
             this.data = data.map((user) => {
@@ -116,7 +117,10 @@ export class ManageUsersComponent implements OnInit {
                 name: user.name,
                 surname: user.surname,
                 position: user.position_id,
-                section: {id: user.section_id, name: getSectionName(user.section_id) },
+                section: {
+                  id: user.section_id,
+                  name: getSectionName(user.section_id)
+                },
                 phoneNumber: user.phone_number,
                 email: user.email
               }
@@ -127,6 +131,7 @@ export class ManageUsersComponent implements OnInit {
                 return section.id == id;
               }).name;
             }
+
             this.onChangeTable(this.config);
           });
         })
@@ -168,38 +173,21 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public changeFilter(data: any, config: any): any {
-    let filteredData: Array<any> = data;
-    this.columns.forEach((column: any) => {
-      if (column.filtering) {
-        filteredData = filteredData.filter((item: any) => {
-          return item[column.name].match(column.filtering.filterString);
-        });
-      }
-    });
+    const filterString = config.filtering.filterString;
 
-    if (!config.filtering) {
-      return filteredData;
-    }
-
-    if (config.filtering.columnName) {
-      return filteredData.filter((item: any) =>
-        item[config.filtering.columnName].match(this.config.filtering.filterString));
-    }
-
-    let tempArray: Array<any> = [];
-    filteredData.forEach((item: any) => {
-      let flag = false;
-      this.columns.forEach((column: any) => {
-        if (item[column.name].toString()
-                             .match(this.config.filtering.filterString)) {
-          flag = true;
+    const filteredData = data.filter((user: User) => {
+      //return true if some column matches filterString
+      return this.columns.find((column: Column) => {
+        switch(column.type) {
+          case 'text':
+            return user[column.name].includes(filterString);
+          case 'select':
+            const columnData : SelectValue = user[column.name];
+            return columnData.name.includes(filterString);
         }
       });
-      if (flag) {
-        tempArray.push(item);
-      }
+
     });
-    filteredData = tempArray;
 
     return filteredData;
   }
@@ -269,7 +257,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   public updateEditableRowData(data: any, column: Column) {
-    if(column.type === 'select') {
+    if (column.type === 'select') {
       this.editableRow[column.name] = this.selectValueById(data);
     } else {
       this.editableRow[column.name] = data;
@@ -287,10 +275,10 @@ export class ManageUsersComponent implements OnInit {
 
   private loadSections() {
     this.userService
-      .getSections()
-      .subscribe((data: Array<SelectValue>) => {
-        this.sections = data;
-      })
+        .getSections()
+        .subscribe((data: Array<SelectValue>) => {
+          this.sections = data;
+        })
   }
 
   private selectValueById(id: number): SelectValue {
