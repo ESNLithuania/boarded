@@ -266,4 +266,16 @@ export class ManageUsersComponent implements OnInit {
       })
   }
 
+  public getSelectValue(row, column: Column): string {
+    const id = this.getData(row, column);
+
+    const section = this.sections.find(_=> _.id == id);
+
+    if(section) {
+      return section.name
+    } else {
+      return id;
+    }
+  }
+
 }

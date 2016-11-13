@@ -70,7 +70,12 @@ SOFTWARE.
         </select>
       </div>
       <div *ngIf="editableRowNumber !== i">
-        {{getData(row, column)}}
+        <span *ngIf="column.type === 'text'">
+          {{getData(row, column)}}
+        </span>
+        <span *ngIf="column.type === 'select'">
+          {{getSelectValue(row, column)}}
+        </span>
       </div>
     </td>
     <td>
