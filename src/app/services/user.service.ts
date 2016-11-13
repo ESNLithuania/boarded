@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {RequestService} from './request.service';
-import {User, Address} from '../classes/user';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { RequestService } from './request.service';
+import { User } from '../classes/user';
+import { Observable } from 'rxjs';
 
 @Injectable()
 
@@ -12,15 +12,21 @@ export class UserService {
 
   public getUsers(): Observable<any> {
     return this.request
-      .users
-      .all();
+               .users
+               .all();
   }
 
   public updateUser(user: User): Observable<any> {
     return this.request
-      .users
-      .update(user)
-      .subscribe(() => {})
+               .users
+               .update(user)
+               .subscribe(() => {})
+  }
+
+  public getSections(): Observable<Array<{id: number, name: string}>> {
+    return this.request
+               .users
+               .sections()
   }
 
 }

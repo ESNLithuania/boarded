@@ -30,7 +30,8 @@ import { User, Address } from '../../classes/user';
 interface Column {
   title: string,
   name: string,
-  sort?: 'desc' | 'asc' | ''
+  type: 'text' | 'select',
+  sort?: 'desc' | 'asc' | '',
 }
 
 @Component({
@@ -44,15 +45,18 @@ export class ManageUsersComponent implements OnInit {
     {
       title: 'Name',
       name: 'name',
-      sort: 'desc'
+      sort: 'desc',
+      type: 'text'
     },
     {
       title: 'Surname',
-      name: 'surname'
+      name: 'surname',
+      type: 'text'
     },
     {
       title: 'Section',
-      name: 'section'
+      name: 'section',
+      type: 'select'
     },
   ];
   public page: number = 1;
@@ -65,6 +69,8 @@ export class ManageUsersComponent implements OnInit {
     sorting: {columns: this.columns},
     filtering: {filterString: ''},
   };
+
+  public sections: Array<any> = [];
   private data: Array<User> = [];
 
   private editableRowNumber: -1 | number = -1;
@@ -75,7 +81,7 @@ export class ManageUsersComponent implements OnInit {
 
   @HostListener('document:click', ['$event.target'])
   public onClick(targetElement: HTMLElement) {
-    const tagsNotToInteractWith = ['INPUT', 'I', 'TH'];
+    const tagsNotToInteractWith = ['INPUT', 'I', 'TH', 'SELECT', 'OPTION'];
     const interact = tagsNotToInteractWith.reduce((result, item) => {
       return result && targetElement.tagName != item;
     }, true);
@@ -89,6 +95,7 @@ export class ManageUsersComponent implements OnInit {
 
   public ngOnInit() {
     this.loadUsers();
+    this.loadSections();
   }
 
   public loadUsers() {
@@ -249,6 +256,14 @@ export class ManageUsersComponent implements OnInit {
       this.userService
           .updateUser(updatedUser)
     }
+  }
+
+  private loadSections() {
+    this.userService
+      .getSections()
+      .subscribe((data: Array<{id: number, name: string}>) => {
+        this.sections = data;
+      })
   }
 
 }

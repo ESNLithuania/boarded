@@ -19,8 +19,8 @@ export class RequestService {
     }
 
     return this.http
-      .post(this.url + url, json, {headers: postHeaders})
-      .map(res => res.json());
+               .post(this.url + url, json, {headers: postHeaders})
+               .map(res => res.json());
   }
 
   public put(url, json, auth: Boolean = true): Observable<any> {
@@ -42,8 +42,8 @@ export class RequestService {
     }
 
     return this.http
-      .get(this.url + url, {headers: getHeaders})
-      .map(res => res.json());
+               .get(this.url + url, {headers: getHeaders})
+               .map(res => res.json());
   }
 
   public get auth(): any {
@@ -64,6 +64,20 @@ export class RequestService {
       },
       update: (user: User) => {
         return this.put(`users/${user.id}`, JSON.stringify(user));
+      },
+      sections: () => {
+        return Observable.from([
+          [
+            {
+              id: 1,
+              name: 'ESN_VU',
+            },
+            {
+              id: 2,
+              name: 'ESN_KTU'
+            }
+          ]
+        ])
       }
     }
   }

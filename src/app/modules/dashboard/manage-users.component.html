@@ -55,7 +55,19 @@ SOFTWARE.
   >
     <td *ngFor="let column of columns">
       <div *ngIf="editableRowNumber === i">
-        <input #input [value]="getData(row, column)" (blur)="updateEditableRowData(input.value, column)">
+        <input *ngIf="column.type === 'text'"
+               #input
+               [value]="getData(row, column)"
+               (blur)="updateEditableRowData(input.value, column)">
+        <select *ngIf="column.type === 'select'"
+                #select
+                (blur)="updateEditableRowData(select.value, column)">
+        >
+          <option *ngFor="let section of sections; let i=index"
+                  [value]="section.id">
+            {{section.name}}
+          </option>
+        </select>
       </div>
       <div *ngIf="editableRowNumber !== i">
         {{getData(row, column)}}
