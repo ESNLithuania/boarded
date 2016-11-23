@@ -64,9 +64,9 @@ SOFTWARE.
                 [value]="getData(row, column).id"
                 (blur)="updateEditableRowData(select.value, column)">
           >
-          <option *ngFor="let section of sections; let i=index"
-                  [value]="section.id">
-            {{section.name}}
+          <option *ngFor="let column of getOptions(column); let i=index"
+                  [value]="column.id">
+            {{column.name}}
           </option>
         </select>
       </div>

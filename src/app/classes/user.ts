@@ -6,6 +6,7 @@ export class User {
               public surname?: string,
               public section?: SelectValue,
               public position?: string,
+              public role? : SelectValue,
               public phoneNumber?: string,
               public email?: string,
               public dateOfBirth?,

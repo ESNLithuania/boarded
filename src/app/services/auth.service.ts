@@ -44,11 +44,9 @@ export class AuthService {
     }
   }
 
-  public roles(): Promise<any> {
+  public roles() {
     return this.request
                .auth.roles()
-               .map(_ => _)
-               .toPromise();
   }
 
   public loggedInUser(): Promise<User> {

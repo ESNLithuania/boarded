@@ -77,7 +77,11 @@ export class RequestService {
         return this.get('users');
       },
       update: (user: User) => {
-        return this.put(`users/${user.id}`, JSON.stringify(user));
+        const backendUser = Object.assign(user, {
+          sectionId: user.section.id,
+          roleId: user.role.id
+        });
+        return this.put(`users/${user.id}`, JSON.stringify(backendUser));
       },
       sections: () => {
         return Observable.from([

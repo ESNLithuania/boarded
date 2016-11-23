@@ -26,6 +26,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../classes/user';
+import { AuthService } from '../../services/auth.service';
 
 interface Column {
   title: string,
@@ -81,12 +82,13 @@ export class ManageUsersComponent implements OnInit {
   };
 
   public sections: Array<any> = [];
+  public roles: Array<any> = [];
   private data: Array<User> = [];
 
   private editableRowNumber: -1 | number = -1;
   private editableRow: Array<any> = [];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService) {
   }
 
   @HostListener('document:click', ['$event.target'])
@@ -106,6 +108,7 @@ export class ManageUsersComponent implements OnInit {
   public ngOnInit() {
     this.loadUsers();
     this.loadSections();
+    this.loadRoles();
   }
 
   public loadUsers() {
@@ -133,23 +136,30 @@ export class ManageUsersComponent implements OnInit {
             });
 
             function getRole(user) {
-              const role = user.roles.length > 0
-                ? {
-                id: user.roles[0].id,
-                name: user.roles[0].name
-              }
-                : {
-                id: 1,
-                name: 'None'
-              };
+              const role =
+                user.roles.length > 0
+                  ? {
+                    id: user.roles[0].id,
+                    name: user.roles[0].name
+                  }
+                  : {
+                  id: 1,
+                  name: 'None'
+                };
 
               return role;
             }
 
             function getSectionName(id) {
-              return sections.find((section) => {
+              const section = sections.find((section) => {
                 return section.id == id;
-              }).name;
+              });
+
+              if(section) {
+                return section.name;
+              } else {
+                return 'No such section'
+              }
             }
 
             this.onChangeTable(this.config);
@@ -278,10 +288,14 @@ export class ManageUsersComponent implements OnInit {
 
   public updateEditableRowData(data: any, column: Column) {
     if (column.type === 'select') {
-      this.editableRow[column.name] = this.selectValueById(data);
+      this.editableRow[column.name] = this.selectValueById(data, column);
     } else {
       this.editableRow[column.name] = data;
     }
+  }
+
+  public getOptions(column: Column) {
+    return this.getSelectValues(column);
   }
 
   private updateUser() {
@@ -301,10 +315,31 @@ export class ManageUsersComponent implements OnInit {
         })
   }
 
-  private selectValueById(id: number): SelectValue {
-    return this.sections.find((section) => {
-      return section.id == id;
-    })
+  private loadRoles() {
+    this.authService
+        .roles()
+        .subscribe((data: Array<SelectValue>) => {
+          this.roles = data;
+        })
   }
 
+  private selectValueById(id: number, column: Column): SelectValue {
+    const values = this.getSelectValues(column);
+    return getSelectValue(id, values);
+
+    function getSelectValue(id, arr) {
+      return arr.find((value: SelectValue) => {
+        return value.id == id;
+      });
+    }
+  }
+
+  private getSelectValues(column: Column) {
+    switch (column.name) {
+      case 'role':
+        return this.roles;
+      case 'section':
+        return this.sections;
+    }
+  }
 }
