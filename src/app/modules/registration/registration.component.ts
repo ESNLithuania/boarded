@@ -15,7 +15,6 @@ import { ValidationService } from '../../services/validation.service';
   selector: 'esn-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  providers: [NgbDatepickerConfig],
   encapsulation: ViewEncapsulation.None
 })
 export class RegistrationComponent {
@@ -29,6 +28,7 @@ export class RegistrationComponent {
 
   private submitted = false;
 
+  //todo remove duplicate code
   sections = [
     'ESN ISLB',
     'ESN ISM',
